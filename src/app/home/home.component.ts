@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  public readonly options = [
+    { label: 'Novo Cadastro' },
+    { label: 'Esqueci minha senha' },
+    { label: 'Contato' }
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
