@@ -15,6 +15,10 @@ export class HomeComponent implements OnInit {
   activeOption: Option = {}
   options: Array<Option> = []
 
+  loginClass = ''
+  registerClass = ''
+  recoveryClass = ''
+
   private loginActiveOption = {
     id: 'login',
     label: 'Login'
@@ -54,7 +58,11 @@ export class HomeComponent implements OnInit {
   }
 
   changeOption(id) {
-    this.activeOption = this[`${id}ActiveOption`]
+    this[`${this.activeOption.id}Class`] = 'component-out'
+    setTimeout(() => {
+      this[`${id}Class`] = 'component-in'
+      this.activeOption = this[`${id}ActiveOption`]
     this.options = id === 'login' ? this.primaryOptions : this.secondaryOptions
+    }, 700)
   }
 }

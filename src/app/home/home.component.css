@@ -63,4 +63,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
+}
+
+@keyframes component-out {
+    to {
+        margin-left: 200%;
+    }
+}
+
+@keyframes component-in {
+    from {
+        margin-left: 200%
+    }
+    to {
+        margin-left: inherit
+    }
+}
+
+.component-out {
+    animation-name: component-out;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+}
+
+.component-in {
+    animation-name: component-in;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
 }
