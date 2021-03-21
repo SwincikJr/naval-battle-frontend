@@ -18,4 +18,8 @@ export class UserService {
     create(user) {
         return this.http.post<any>(`${this.url}/user`, user)
     }
+
+    authenticate(login, password) {
+        return this.http.post<any>(`${this.url}/authenticate`, { login, password })
+    }
 }

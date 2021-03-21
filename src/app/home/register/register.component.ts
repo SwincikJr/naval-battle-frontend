@@ -43,6 +43,12 @@ export class RegisterComponent implements OnInit {
             confirmPassword: ''
         })
         this.notification.success('e-mail de validação do cadastro enviado!')
+    }, error => {
+        this.loading = false
+        if (!error.status) {
+            return this.notification.danger('Não foi possível se comunicar com o servidor! Por favor, tente novamente mais tarde.')    
+        }
+        return this.notification.danger(error.error.errors[0].message)
     })
   }
 
@@ -51,6 +57,11 @@ export class RegisterComponent implements OnInit {
     if (email.trim()) {
         this.userService.exists('email', email).subscribe(resp => {
             this.emailExistsError = resp.exists
+        }, error => {
+            if (!error.status) {
+                return this.notification.danger('Não foi possível se comunicar com o servidor! Por favor, tente novamente mais tarde.')    
+            }
+            return this.notification.danger(error.error.errors[0].message)
         })
     }
   }
@@ -60,6 +71,11 @@ export class RegisterComponent implements OnInit {
     if (username.trim()) {
         this.userService.exists('username', username).subscribe(resp => {
             this.usernameExistsError = resp.exists
+        }, error => {
+            if (!error.status) {
+                return this.notification.danger('Não foi possível se comunicar com o servidor! Por favor, tente novamente mais tarde.')    
+            }
+            return this.notification.danger(error.error.errors[0].message)
         })
     }
   }
