@@ -22,4 +22,8 @@ export class UserService {
     authenticate(login, password) {
         return this.http.post<any>(`${this.url}/authenticate`, { login, password })
     }
+
+    activate(email, activation_key) {
+        return this.http.post<any>(`${this.url}/activate/user`, { email, activation_key })
+    }
 }

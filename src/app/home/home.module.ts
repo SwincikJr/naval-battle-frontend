@@ -9,13 +9,15 @@ import { UserService } from './services/user'
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { NotificationService } from '../shared/services/notification.service'
+import { ActivateComponent } from './activate/activate.component'
 
 @NgModule({
   declarations: [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    RecoveryComponent
+    RecoveryComponent,
+    ActivateComponent
   ],
   imports: [
     CommonModule,
