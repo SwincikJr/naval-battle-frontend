@@ -1,0 +1,21 @@
+import { Injectable } from '@angular/core'
+import { HttpClient } from "@angular/common/http";
+import { environment } from '../../../environments/environment'
+
+@Injectable({
+    providedIn: "root",
+})
+export class UserService {
+    
+    public readonly url = `${environment.urlApi}`
+
+    constructor(private http: HttpClient) {}
+    
+    exists(property, value) {
+        return this.http.get<any>(`${this.url}/exists/user?property=${property}&value=${value}`)
+    }
+
+    create(user) {
+        return this.http.post<any>(`${this.url}/user`, user)
+    }
+}
