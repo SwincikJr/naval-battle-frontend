@@ -1,6 +1,11 @@
-<div class="artemisia-form-component">
+<form [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
+    <artemisia-input [formGroup]="recoveryForm" formPropertyName="login" placeholder="e-mail ou nickname" type="text"></artemisia-input>
+    <artemisia-button label="confirmar" [disabled]="!recoveryForm.valid || loading" [loading]="loading"></artemisia-button>
+</form>
+
+<!-- <div class="artemisia-form-component">
     <input class="artemisia-form-input" placeholder="e-mail ou nickname" type="text"/>
 </div>
 <div class="artemisia-form-component">
     <button class="artemisia-form-button">confirmar</button>
-</div>
+</div> -->

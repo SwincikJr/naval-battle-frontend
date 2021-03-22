@@ -26,4 +26,8 @@ export class UserService {
     activate(email, activation_key) {
         return this.http.post<any>(`${this.url}/activate/user`, { email, activation_key })
     }
+
+    recovery(login) {
+        return this.http.post<any>(`${this.url}/recovery/password`, { login })
+    }
 }
