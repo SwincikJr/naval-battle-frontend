@@ -79,12 +79,12 @@ input{
 
 .notification-success {
     color: #046113;
-    background-color: rgb(104, 184, 104);
+    background-color: rgb(153, 238, 153);
 }
 
 .notification-danger {
-    color: rgb(197, 13, 13);
-    background-color: rgb(221, 122, 122);
+    color: rgb(153, 8, 8);
+    background-color: rgb(243, 156, 156);
 }
 
 .notification-in {
