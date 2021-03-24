@@ -18,10 +18,16 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl('', [Validators.required, Validators.pattern(/^(?!\s*$).+/), isEqual('password')])
   })
 
-  usernameExistsError = false
-  emailExistsError = false
-
+  usernameExists = false
+  emailExists = false
   loading = false
+
+  errors = {
+    username: [],
+    email: [],
+    password: [],
+    confirmPassword: []
+  }
 
   constructor(private userService: UserService, private notification: NotificationService) { }
 
@@ -53,10 +59,12 @@ export class RegisterComponent implements OnInit {
   }
 
   checkEmail() {
+    this.emailExists = true
     const email = this.registerForm.get('email').value
     if (email.trim()) {
         this.userService.exists('email', email).subscribe(resp => {
-            this.emailExistsError = resp.exists
+            this.emailExists = resp.exists
+            if (resp.exists) this.errors.email.push('endereço de e-mail em uso')
         }, error => {
             if (!error.status) {
                 return this.notification.danger('Não foi possível se comunicar com o servidor! Por favor, tente novamente mais tarde.')    
@@ -67,10 +75,12 @@ export class RegisterComponent implements OnInit {
   }
 
   checkUsername() {
+    this.usernameExists = true
     const username = this.registerForm.get('username').value
     if (username.trim()) {
         this.userService.exists('username', username).subscribe(resp => {
-            this.usernameExistsError = resp.exists
+            this.usernameExists = resp.exists
+            if (resp.exists) this.errors.username.push('nome de usuário em uso')
         }, error => {
             if (!error.status) {
                 return this.notification.danger('Não foi possível se comunicar com o servidor! Por favor, tente novamente mais tarde.')    
@@ -78,5 +88,24 @@ export class RegisterComponent implements OnInit {
             return this.notification.danger(error.error.errors[0].message)
         })
     }
+  }
+
+  checkErrors(field) {
+    this.errors[field] = []
+    const { errors } = this.registerForm.get(field)
+    if (errors) {
+        if (errors.required) this.errors[field].push('Este campo é obrigatório!')
+        if (errors.pattern) this.errors[field].push('Valor inválido!')
+    }
+  }
+
+  checkPasswords(triggerField, goalField) {
+    this.registerForm.get(goalField).updateValueAndValidity()
+    const triggerErrors = this.registerForm.get(triggerField).errors
+    const goalErrors = this.registerForm.get(goalField).errors
+    if (triggerErrors?.isEqualValidationFailed || goalErrors?.isEqualValidationFailed)
+      this.errors.confirmPassword.push('As senhas não conferem!')
+    else
+      this.errors[goalField] = []
   }
 }

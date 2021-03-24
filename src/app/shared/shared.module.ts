@@ -5,12 +5,14 @@ import { LoadingComponent } from './loading/loading.component'
 import { ArtemisiaButtonComponent } from './artemisia-button/artemisia-button.component'
 import { ArtemisiaInputComponent } from './artemisia-input/artemisia-input.component'
 import { ReactiveFormsModule } from '@angular/forms';
+import { ArtemisiaFieldErrorsComponent } from './artemisia-field-errors/artemisia-field-errors.component'
 
 @NgModule({
   declarations: [
     LoadingComponent,
     ArtemisiaButtonComponent,
-    ArtemisiaInputComponent
+    ArtemisiaInputComponent,
+    ArtemisiaFieldErrorsComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     LoadingComponent,
     ArtemisiaButtonComponent,
-    ArtemisiaInputComponent
+    ArtemisiaInputComponent,
+    ArtemisiaFieldErrorsComponent
   ]
 })
 export class SharedModule { }

@@ -1,9 +1,11 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <artemisia-input [formGroup]="registerForm" formPropertyName="username" placeholder="nome de usuário" type="text" (focusout)="checkUsername()"></artemisia-input>
-    <div *ngIf="usernameExistsError" class="artemisia-form-field-error">nome de usuário em uso</div>
-    <artemisia-input [formGroup]="registerForm" formPropertyName="email" placeholder="e-mail" type="text" (focusout)="checkEmail()"></artemisia-input>
-    <div *ngIf="emailExistsError" class="artemisia-form-field-error">endereço de e-mail em uso</div>
-    <artemisia-input [formGroup]="registerForm" formPropertyName="password" placeholder="senha" type="password"></artemisia-input>
-    <artemisia-input [formGroup]="registerForm" formPropertyName="confirmPassword" placeholder="confirmação de senha" type="password"></artemisia-input>
-    <artemisia-button label="confirmar" [disabled]="!registerForm.valid || loading || usernameExistsError || emailExistsError" [loading]="loading"></artemisia-button>
+    <artemisia-input [formGroup]="registerForm" formPropertyName="username" placeholder="nome de usuário" type="text" (focusout)="checkErrors('username');checkUsername()"></artemisia-input>
+    <artemisia-field-errors [errors]="errors.username"></artemisia-field-errors>
+    <artemisia-input [formGroup]="registerForm" formPropertyName="email" placeholder="e-mail" type="text" (focusout)="checkErrors('email');checkEmail()"></artemisia-input>
+    <artemisia-field-errors [errors]="errors.email"></artemisia-field-errors>
+    <artemisia-input [formGroup]="registerForm" formPropertyName="password" placeholder="senha" type="password" (focusout)="checkErrors('password');checkPasswords('password', 'confirmPassword')"></artemisia-input>
+    <artemisia-field-errors [errors]="errors.password"></artemisia-field-errors>
+    <artemisia-input [formGroup]="registerForm" formPropertyName="confirmPassword" placeholder="confirmação de senha" type="password" (focusout)="checkErrors('confirmPassword');checkPasswords('confirmPassword', 'password')"></artemisia-input>
+    <artemisia-field-errors [errors]="errors.confirmPassword"></artemisia-field-errors>
+    <artemisia-button label="confirmar" [disabled]="!registerForm.valid || loading || usernameExists || emailExists" [loading]="loading"></artemisia-button>
 </form>
