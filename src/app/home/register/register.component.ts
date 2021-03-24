@@ -100,6 +100,7 @@ export class RegisterComponent implements OnInit {
   }
 
   checkPasswords(triggerField, goalField) {
+    if (this.errors[goalField].length) return
     this.registerForm.get(goalField).updateValueAndValidity()
     const triggerErrors = this.registerForm.get(triggerField).errors
     const goalErrors = this.registerForm.get(goalField).errors
