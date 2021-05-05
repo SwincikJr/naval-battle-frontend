@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.user-home-background {
+  background-image: url("../../../assets/deck_pirate.jpg");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+}
+
+.user-home-ranking-area {
+  width: 550px;
+  height: 550px;
+  margin: 0 auto;
+  background-image: url("../../../assets/Pergaminho2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* .user-home-ranking-area img {
+  max-height: 100%;
+  max-width: 100%;
+} */
+
+.user-home-navbar {
+  background-color: #23a7c8;
+  overflow: hidden;
+  height: 50px;
+}
+
+.navbar-ico {
+  width: 30px;
+  float: left;
+  margin: 10px;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  padding-left: 55%;
+}
+
+.navbar-text {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  float: left;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding-right: 2%;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.text-ranking {
+  position: absolute;
+  color: black;
+  top: 100px;
+}
+
+.text-ranking img {
+  width: 150px;
+  margin-left: 70px;
+}
+
+.text-ranking h2 {
+  float: right;
+  font-size: 40px;
+  padding-top: 40px;
+}
+
+.user-ranking {
+  margin-left: 90px;
+  padding-top: 200px;
+}
+
+.ranking-ico {
+  float: left;
+  width: 40px;
+  margin: 10px;
+}

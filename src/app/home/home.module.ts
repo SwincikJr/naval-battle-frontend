@@ -8,8 +8,9 @@ import { RecoveryComponent } from './recovery/recovery.component'
 import { UserService } from './services/user'
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { NotificationService } from '../shared/services/notification.service'
-import { ActivateComponent } from './activate/activate.component'
+import { NotificationService } from '../shared/services/notification.service';
+import { ActivateComponent } from './activate/activate.component';
+import { HomeUserComponent } from './home-user/home-user.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ActivateComponent } from './activate/activate.component'
     LoginComponent,
     RegisterComponent,
     RecoveryComponent,
-    ActivateComponent
+    ActivateComponent,
+    HomeUserComponent,
   ],
   imports: [
     CommonModule,
