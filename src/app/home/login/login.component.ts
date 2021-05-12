@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UserService } from '../services/user';
 
@@ -19,7 +20,11 @@ export class LoginComponent implements OnInit {
   loginError = false
   loginErrorLabel = ''
 
-  constructor(private userService: UserService, private notification: NotificationService) { }
+  constructor(
+    private userService: UserService, 
+    private notification: NotificationService, 
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -30,8 +35,8 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.get('password').value
     this.userService.authenticate(login, password).subscribe(resp => {
       this.loading = false
-      localStorage.setItem('artemisia_token', resp.token)
-      this.notification.success('Login realizado com sucesso!')
+      localStorage.setItem('artemisia_user', JSON.stringify(resp))
+      this.router.navigateByUrl('/home')
     }, error => {
       this.loading = false
       if (!error.status) {

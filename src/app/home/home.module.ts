@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NotificationService } from '../shared/services/notification.service';
 import { ActivateComponent } from './activate/activate.component';
 import { HomeUserComponent } from './home-user/home-user.component';
+import { SocketService } from '../shared/services/socket.service'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HomeUserComponent } from './home-user/home-user.component';
   ],
   providers: [
     UserService,
-    NotificationService
+    NotificationService,
+    SocketService
   ]
 })
 export class HomeModule { }
