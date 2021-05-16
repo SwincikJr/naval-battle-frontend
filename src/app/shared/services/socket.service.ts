@@ -17,14 +17,13 @@ export class SocketService {
             transports: ["websocket"],
             upgrade: false,
             auth: {
-              token: this.userService.authenticated.token
+              token: this.userService.getAuthenticated().token
             },
             query: {
               protocol: 'artemisia',
             }
         })
-
+        
         return this.socket;
     }
-    
 }

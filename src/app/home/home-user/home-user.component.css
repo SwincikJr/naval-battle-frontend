@@ -68,31 +68,99 @@ a:link {
   background-image: url("../../../assets/Pergaminho2.png");
   background-size: contain;
   background-repeat: no-repeat;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.user-home-ranking-area-display {
+  padding: 75px;
+}
+
+.text-ranking {
+  /* position: absolute;
+  top: 110px;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: row; */
+  width: 94%;
+  height: 100px;
+}
+
+.text-ranking-logo {
+  width: 50%;
+  height: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-ranking-logo img {
+  height: 100%;
+}
+
+.text-ranking-title {
+  width: 50%;
+  height: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+}
+
+/* .text-ranking img {
+  width: 150px;
+  width: 200px;
+  margin-left: 70px;
+  display: flex;
+  flex: 1;
+} */
+
+/* .text-ranking h2 {
+  font-size: 40px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+} */
+
+.ranking-display {
+  width: 94%;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.text-ranking {
-  position: absolute;
-  top: 110px;
-  margin-right: 30px;
+.play-option {
+  width: 94%;
+  height: 50px;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
-.text-ranking img {
-  /* width: 150px; */
-  width: 200px;
-  /* margin-left: 70px; */
-  display: flex;
-  flex: 1;
+.play-option img {
+  height: 100%;
 }
 
-.text-ranking h2 {
-  font-size: 40px;
+.start-match-modal {
+  width: 100%;
+  padding: 25px;
+}
+
+.start-match-modal-header {
   display: flex;
-  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.start-match-modal-option {
+  /* width: 50%;
+  height: 100%; */
+  display: flex;
   justify-content: center;
   align-items: center;
 }

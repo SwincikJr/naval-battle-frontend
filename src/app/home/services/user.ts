@@ -9,7 +9,7 @@ import { User } from '../../shared/interfaces/user'
 export class UserService {
     
     public readonly url = `${environment.urlApi}`;
-    public authenticated: User = null;
+    private authenticated: User = null;
 
     constructor(private http: HttpClient) {
         this.loadAuthenticatedByLocalStorage();
@@ -55,5 +55,10 @@ export class UserService {
     isAuthenticated(): boolean {
         if (!this.authenticated) this.loadAuthenticatedByLocalStorage()
         return !!this.authenticated
+    }
+
+    getAuthenticated() {
+        if (!this.authenticated) this.loadAuthenticatedByLocalStorage()
+        return this.authenticated
     }
 }

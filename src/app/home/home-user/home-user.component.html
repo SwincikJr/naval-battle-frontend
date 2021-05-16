@@ -35,11 +35,122 @@
     </div>
     
     <div class="user-home-ranking-area">
-      <div class="text-ranking">
-        <img src="../assets/artemisia.ico" />
-        <h2>Ranking</h2>
+      <div class="user-home-ranking-area-display">
+        <div class="text-ranking">
+          <!-- <img src="../assets/artemisia.ico" />
+          <h2>Ranking</h2> -->
+          <div class="text-ranking-logo">
+            <img src="../assets/artemisia.ico" />
+          </div>
+          <div class="text-ranking-title">
+            <h1>Ranking</h1>
+          </div>
+        </div>
+        <div class="ranking-display">
+          ranking goes here...
+        </div>
+        <div class="play-option" (click)="openStartMatchModal()">
+          <img src="../../../assets/shuffle.png" />
+        </div>
       </div>
-
     </div>
   </div>
 </div>
+
+<ng-template #startMatchModal>
+  <div class="start-match-modal">
+    <div class="start-match-modal-header">
+      <h2>À luta, marujos!</h2>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Desafiar um jogador" 
+        (click)="challenge()"
+      ></artemisia-button>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Encontrar algém disponível" 
+        [disabled]="finding"
+        [loading]="finding"
+        (click)="find()"
+      ></artemisia-button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #waitingModal>
+  <div class="start-match-modal">
+    <div class="start-match-modal-header">
+      <h3>Estamos à procura de uma vítima para abordar!</h3>
+    </div>
+    <div style="padding: 15px;">
+      <p>A partida começará assim que encontrarmos um jogador disponível...</p>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Cancelar busca"
+        [disabled]="canceling"
+        [loading]="canceling"
+        (click)="cancelMatch()"
+      ></artemisia-button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #challengeModal>
+  <div class="start-match-modal">
+    <div class="start-match-modal-option">
+      <form [formGroup]="challengeForm" (ngSubmit)="challengeSubmit()">
+        <artemisia-input [formGroup]="challengeForm" formPropertyName="login" placeholder="e-mail ou nickname" type="text"></artemisia-input>
+        <artemisia-button label="desafiar" [disabled]="!challengeForm.valid || challenging" [loading]="challenging"></artemisia-button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #challengingModal>
+  <div class="start-match-modal">
+    <div class="start-match-modal-header">
+      <h3>Jogador abordado!</h3>
+    </div>
+    <div style="padding: 15px;">
+      <p>O jogador recebeu seu desafio! Estamos aguardando sua resposta...</p>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Cancelar desafio"
+        [disabled]="canceling"
+        [loading]="canceling"
+        (click)="cancelChallenge()"
+      ></artemisia-button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #challengedModal>
+  <div class="start-match-modal">
+    <div class="start-match-modal-header">
+      <h3>Você foi abordado por {{ challengerUsername }}!</h3>
+    </div>
+    <div style="padding: 15px;">
+      <p>O quê deseja fazer?</p>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Aceitar"
+        [disabled]="accepting"
+        [loading]="accepting"
+        (click)="acceptChallenge()"
+      ></artemisia-button>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Declinar"
+        [disabled]="canceling"
+        [loading]="canceling"
+        (click)="refuseChallenge()"
+      ></artemisia-button>
+    </div>
+  </div>
+</ng-template>

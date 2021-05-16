@@ -12,6 +12,9 @@ import { NotificationService } from '../shared/services/notification.service';
 import { ActivateComponent } from './activate/activate.component';
 import { HomeUserComponent } from './home-user/home-user.component';
 import { SocketService } from '../shared/services/socket.service'
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { GameService } from '../shared/services/game.service'
+import { HttpService } from '../shared/services/http.service'
 
 @NgModule({
   declarations: [
@@ -31,7 +34,11 @@ import { SocketService } from '../shared/services/socket.service'
   providers: [
     UserService,
     NotificationService,
-    SocketService
+    SocketService,
+    NgbModalConfig,
+    NgbModal,
+    GameService,
+    HttpService
   ]
 })
 export class HomeModule { }
