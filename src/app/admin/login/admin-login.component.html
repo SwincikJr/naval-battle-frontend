@@ -1,0 +1,13 @@
+
+<div style="background-color: rgb(212, 211, 211);width: 100%; height: 100vh; margin: 0;">
+    <div style="width: 50%; height: 100vh; margin: 0; float: left; display: flex; justify-content: center; align-items: center;">
+        <h1>Portal do Administrador</h1>
+    </div>
+    <div style="width: 50%; height: 100vh; margin: 0; float: left; display: flex; justify-content: center; align-items: center;">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <artemisia-input [formGroup]="loginForm" formPropertyName="username" placeholder="usuário" type="text"></artemisia-input>
+            <artemisia-input [formGroup]="loginForm" formPropertyName="password" placeholder="senha" type="password"></artemisia-input>
+            <artemisia-button label="Entrar" [disabled]="!loginForm.valid || loading" [loading]="loading"></artemisia-button>
+        </form>
+    </div>
+</div>

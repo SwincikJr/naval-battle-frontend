@@ -9,4 +9,5 @@ export class ArtemisiaButtonComponent {
   @Input() disabled: Boolean
   @Input() loading: Boolean
   @Input() label: string
+  @Input() type: string
 }

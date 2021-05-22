@@ -1,0 +1,32 @@
+<div style="width: 100%; height: 100vh; margin: 0; background-color: rgb(212, 211, 211);">
+    <div (click)="logoff()" style="padding-top: 15px; text-align: right; padding-right: 15px;cursor: pointer;">Sair do Sistema</div>
+    
+    <h2 style="text-align: center; margin-bottom: 50px;">Modalidades de Jogo</h2>
+    
+    <div style="padding-left: 30px;margin-bottom: 30px;">
+        <artemisia-button
+            (click)="newGame()"
+            label="Criar nova modalidade"
+        ></artemisia-button>
+    </div>
+    
+    <table style="width: 100%;">
+        <tr style="text-align: center;border-bottom: 1px solid black;">
+            <th>ID</th>
+            <th>NOME</th>
+            <th>TAMANHO DO TABULEIRO</th>
+            <th>TOTAL DE EMBARCAÇÕES</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let game of adminService.games" style="text-align: center; font-size: 0.9em;">
+            <th style="padding: 15px;"> {{ game.id }} </th>
+            <th style="padding: 15px;"> {{ game.label }} </th>
+            <th style="padding: 15px;"> {{ game.rowBoard }} x {{ game.columnBoard }} </th>
+            <th style="padding: 15px;"> {{ game.totalVessels }} </th>
+            <th style="padding: 15px;"> 
+                <div [routerLink]="['/admin/game', game._id]" routerLinkActive="router-link-active" style="width: fit-content;margin-right: 10px;float: left;cursor: pointer;">Editar</div>
+                <div *ngIf="game.id !== 'classic'" (click)="deleteGame(game._id)" style="width: fit-content;margin-left: 10px;float: left;cursor: pointer;">Excluir</div>
+            </th>
+        </tr>
+    </table>
+</div>

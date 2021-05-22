@@ -1,5 +1,5 @@
 <div class="artemisia-form-component">
-    <button type="submit" [disabled]="disabled" class="artemisia-form-button">
+    <button [type]="type || 'submit'" [disabled]="disabled" class="artemisia-form-button">
         <span *ngIf="!loading">{{ label }}</span>
         <loading-component *ngIf="loading"></loading-component>
     </button>

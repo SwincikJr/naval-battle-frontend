@@ -1,0 +1,65 @@
+<div style="width: 100%;background-color: rgb(212, 211, 211); border: 0;">
+    <div [routerLink]="['/admin']" routerLinkActive="router-link-active" style="padding-top: 15px; text-align: right; padding-right: 15px;cursor: pointer;">Voltar</div>
+    <h3 style="padding-top: 30px;margin-bottom: 50px; text-align: center;"> Modalidade de jogo</h3>
+    <div style="width: 100%;display: flex;align-items: center;justify-content: center;">
+        <form style="width: 60%;" [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+                <h4 style="margin-bottom: 30px;">Informações gerais:</h4>
+                
+                <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <artemisia-input [formGroup]="gameForm" formPropertyName="id" placeholder="ID" type="text"></artemisia-input>
+                </div>
+                <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <artemisia-input [formGroup]="gameForm" formPropertyName="label" placeholder="Nome" type="text"></artemisia-input>
+                </div>
+                <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <artemisia-input [formGroup]="gameForm" formPropertyName="rowBoard" placeholder="Linhas" type="number"></artemisia-input>
+                </div>
+                <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <artemisia-input [formGroup]="gameForm" formPropertyName="columnBoard" placeholder="Colunas" type="number"></artemisia-input>
+                </div>
+
+                
+                <div *ngFor="let vessel of vessels.controls; index as i">
+                    <hr style="border-width: 2px;border-color: black;">
+                    <h5>Embarcação:</h5>
+                    <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                        <artemisia-input [formGroup]="vessel" formPropertyName="id" placeholder="ID" type="text"></artemisia-input>
+                    </div>
+                    <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                        <artemisia-input [formGroup]="vessel" formPropertyName="label" placeholder="Nome" type="text"></artemisia-input>
+                    </div>
+                    <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                        <artemisia-input [formGroup]="vessel" formPropertyName="amountPerPlayer" placeholder="Quantidade por jogador" type="number"></artemisia-input>
+                    </div>
+                
+                    <h6 style="text-align: center;">Mapeamento da embarcação:</h6>
+                    <div *ngFor="let map of getMapOfVessel(vessel).controls; index as j">
+                        <hr>
+                        <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                            <artemisia-input [formGroup]="map" formPropertyName="row" placeholder="Adicionar à linha..." type="number"></artemisia-input>
+                        </div>
+                        <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                            <artemisia-input [formGroup]="map" formPropertyName="column" placeholder="Adicionar à coluna..." type="number"></artemisia-input>
+                        </div>
+                        <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                            <artemisia-button label="Excluir mapeamento" type="button" (click)="removeMapOnVessel(vessel, j)"></artemisia-button>
+                        </div>
+                    </div>
+                    <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                        <artemisia-button label="Adicionar mapeamento" type="button" (click)="addMapOnVessel(vessel)"></artemisia-button>
+                    </div>
+                    <hr>
+                    <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                        <artemisia-button label="Excluir embarcação" type="button" (click)="removeVessel(i)"></artemisia-button>
+                    </div>
+                </div>
+                <hr style="border-width: 2px;border-color: black;">
+                <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <artemisia-button label="Adicionar embarcação" type="button" (click)="addPlayableVessel()"></artemisia-button>
+                </div>
+                <div style="width: 100%;display: flex;justify-content: center;align-items: center;">
+                    <artemisia-button label="Salvar" [disabled]="!gameForm.valid || !vessels.controls.length || loading" [loading]="loading"></artemisia-button>
+                </div>
+        </form>
+    </div>
+</div>
