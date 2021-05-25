@@ -5,7 +5,7 @@ import { PreparationComponent } from './preparation/preparation.component'
 
 const routes: Routes = [
   {
-    path: 'preparation', component: PreparationComponent, canActivate: [AuthGuard]
+    path: 'preparation/:id', component: PreparationComponent, canActivate: [AuthGuard]
   }
 ];
 

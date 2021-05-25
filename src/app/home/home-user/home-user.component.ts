@@ -73,7 +73,7 @@ export class HomeUserComponent implements OnInit {
   private startedMatch(match) {
     console.log(match)
     this.modalService.dismissAll()
-    this.router.navigateByUrl('/game/preparation')
+    this.router.navigateByUrl(`/game/preparation/${match._id}`)
   }
 
   private newChallenge(challenge) {

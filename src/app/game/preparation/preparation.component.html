@@ -1,1 +1,41 @@
-Preparação do tabuleiro...
+<div style="width: 350px; float: left;">
+    <div *ngFor="let vessel of vessels; index as v"
+        id="{{v}}-{{vessel.id}}"
+        style="clear: both; padding: 15px;height: fit-content;display: flex; justify-content: center; align-items: center;"
+    >
+    <div style="float: left; width: fit-content;margin-right: 15px;">{{ vessel.label }}</div>
+        <div
+            id="{{v}}-{{vessel.id}}-area"
+            style="float: left;"
+            (dragstart)="drag($event)"
+            draggable="true"
+        >
+            <div *ngFor="let row of getRowsNumberOfMap(vessel.map); index as row_index">
+                <div 
+                    id="{{v}}-{{vessel.id}}-{{row_index}}-{{column_index}}"
+                    *ngFor="let column of getColumnsNumberOfMap(vessel.map); index as column_index" 
+                    class="board-coordinate playable-coordinate"
+                    [style]="getStyleOfVessel(row_index, column_index, vessel.map)"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="board-area">
+    <div *ngFor="let row of rows; index as i">
+        <div *ngFor="let column of columns; index as j"
+            class="board-coordinate {{ getClassByCoordinate(i, j) }}"
+            (dragover)="allowDrop($event, i, j)"
+            (drop)="drop($event, i, j)"
+            id="{{ getCoordinateId(i, j) }}"
+        >
+            {{ getCoordinateContent(i, j) }}
+        </div>
+    </div>
+</div>
+
+<!-- <div class="board-house">
+
+</div> -->

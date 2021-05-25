@@ -42,4 +42,8 @@ export class GameService {
     acceptChallenge() {
         return this.httpClient.put(`${this.baseEndpoint}/challenge`, null, { headers: this.getHeader() });
     }
+
+    getInfo(MatchId) {
+        return this.httpClient.get(`${this.baseEndpoint}/info/${MatchId}`, { headers: this.getHeader() });
+    }
 }
