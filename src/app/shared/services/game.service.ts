@@ -51,4 +51,12 @@ export class GameService {
     confirmStartPositions(body) {
         return this.httpClient.post(`${this.boardEndpoint}`, body, { headers: this.getHeader() });
     }
+
+    getBattle(matchId) {
+        return this.httpClient.get(`${this.baseEndpoint}/battle/${matchId}`, { headers: this.getHeader() });
+    }
+
+    attack(matchId, row, column) {
+        return this.httpClient.put(`${this.baseEndpoint}/battle/${matchId}`, { row, column }, { headers: this.getHeader() })
+    }
 }

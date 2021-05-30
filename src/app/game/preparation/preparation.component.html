@@ -38,6 +38,17 @@
 
 <artemisia-button label="Confirmar" (click)="confirmStartPositions()" [disabled]="(this.startPositions.length < this.vessels.length) || loading" [loading]="loading"></artemisia-button>
 
+<ng-template #waitModal>
+    <div class="start-match-modal">
+      <div class="start-match-modal-header">
+        <h3>Firmes, marujos!</h3>
+      </div>
+      <div style="padding: 15px;">
+        <p>A partida terá início assim que seu adversário finalizar o posicionamento de suas embarcações.</p>
+      </div>
+    </div>
+</ng-template>
+
 <!-- <div class="board-house">
 
 </div> -->

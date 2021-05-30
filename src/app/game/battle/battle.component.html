@@ -1,0 +1,59 @@
+<div style="width: 100%;">
+
+    <div style="max-width: 50%; width: 50%; float: left;">
+        <h1 style="text-align: center;">Você</h1>
+        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+            <div [style]="getHeightOfBoard()">
+                <div *ngFor="let row of rowsArray; index as row_index" [style]=getRowStyle()>
+                    <div
+                        id="myboard-{{row_index - 1}}-{{column_index - 1}}"
+                        *ngFor="let column of columnsArray; index as column_index"
+                        [class]="getClassNameOfCoordinate(row_index, column_index)"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="max-width: 50%; width: 50%; float: left;">
+        <h1 style="text-align: center;">Oponente</h1>
+        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+            <div [style]="getHeightOfBoard()">
+                <div *ngFor="let row of rowsArray; index as row_index" [style]=getRowStyle()>
+                    <div 
+                        id="{{row_index - 1}}-{{column_index - 1}}"
+                        *ngFor="let column of columnsArray; index as column_index"
+                        [class]="getClassNameOfCoordinate(row_index, column_index, true)"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #yourTurnModal>
+    <div class="start-match-modal">
+      <div class="start-match-modal-header">
+        <h3>É a sua vez!</h3>
+      </div>
+      <div style="padding: 15px;">
+        <p>Escolha uma coordenada no tabuleiro de seu adversário para atacar.</p>
+      </div>
+      <artemisia-button label="Entendi" (click)="closeYourTurnModal()"></artemisia-button>
+    </div>
+</ng-template>
+
+<ng-template #opponentTurnModal>
+    <div class="start-match-modal">
+      <div class="start-match-modal-header">
+        <h3>É a vez do seu opponente!</h3>
+      </div>
+      <div style="padding: 15px;">
+        <p>Aguarde enquanto seu adversário realiza sua jogada.</p>
+      </div>
+      <artemisia-button label="Entendi" (click)="closeOpponentTurnModal()"></artemisia-button>
+    </div>
+</ng-template>

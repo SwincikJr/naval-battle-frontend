@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { GameService } from 'src/app/shared/services/game.service';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { SocketService } from 'src/app/shared/services/socket.service';
 
 @Component({
   selector: 'preparation-component',
@@ -18,13 +20,22 @@ export class PreparationComponent implements OnInit {
   startPositions = [];
   loading = false;
   matchId = '';
+  waiting = false;
+  socket = null;
+
+  @ViewChild('waitModal')
+  private waitModalTemplate: TemplateRef<any>;
+
+  private waitModal: NgbModalRef;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private gameService: GameService,
-    private notification: NotificationService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private modalService: NgbModal,
+    private config: NgbModalConfig,
+    private socketService: SocketService
   ) { }
 
   ngOnInit(): void {
@@ -43,11 +54,24 @@ export class PreparationComponent implements OnInit {
             })
           }
         })
+        this.socket = this.socketService.connect();
+        this.socket.on('artemisia.opponentReady', () => { this.startMatch() })
       }, error => {
         this.httpService.HttpErrorHandler(error)
         this.router.navigateByUrl('/home')
       })
     })
+  }
+
+  startMatch() {
+    if (this.waiting) {
+      this.waitModal.close()
+      this.goToBattle()
+    }
+  }
+
+  goToBattle() {
+    this.router.navigateByUrl(`game/battle/${this.matchId}`)
   }
 
   getClassByCoordinate(i, j) {
@@ -201,9 +225,15 @@ export class PreparationComponent implements OnInit {
       MatchId: this.matchId,
       maritmeSpace: this.startPositions
     }
-    this.gameService.confirmStartPositions(body).subscribe(resp => {
+    this.gameService.confirmStartPositions(body).subscribe((resp: any) => {
       this.loading = false
-      this.notification.success('posições confirmadas!')
+      if (resp.wait) {
+        this.waiting = true;
+        this.config.backdrop = 'static';
+        this.waitModal = this.modalService.open(this.waitModalTemplate)
+      } else {
+        this.goToBattle()
+      }
     }, error => {
       this.loading = false
       this.httpService.HttpErrorHandler(error)

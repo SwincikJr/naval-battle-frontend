@@ -1,0 +1,31 @@
+.coordinate {
+    height: 25px;
+    width: 25px;
+    float: left;
+    margin: 1.5px;
+}
+
+.row-indicator, .column-indicator {
+    background-color: blueviolet;
+}
+
+.not-empty {
+    background-color: blue;
+}
+
+.empty {
+    border: 1px solid black;
+}
+
+.opponent-not-empty, .destroyed {
+    background-color: red;
+}
+
+.hoverble:hover {
+    cursor: pointer;
+    background-color: gray;
+}
+
+.opponent-attacked, .attacked {
+    background-color: gray;
+}
