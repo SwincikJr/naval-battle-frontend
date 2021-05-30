@@ -36,6 +36,8 @@
     </div>
 </div>
 
+<artemisia-button label="Confirmar" (click)="confirmStartPositions()" [disabled]="(this.startPositions.length < this.vessels.length) || loading" [loading]="loading"></artemisia-button>
+
 <!-- <div class="board-house">
 
 </div> -->

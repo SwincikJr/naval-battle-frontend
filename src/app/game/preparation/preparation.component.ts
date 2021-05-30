@@ -15,6 +15,9 @@ export class PreparationComponent implements OnInit {
   rows = [];
   columns = [];
   vessels = [];
+  startPositions = [];
+  loading = false;
+  matchId = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +29,7 @@ export class PreparationComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.matchId = params.id
       this.gameService.getInfo(params.id).subscribe((resp: any) => {
         this.gameInfo = resp
         this.rows = new Array(resp.rowBoard + 1)
@@ -71,6 +75,21 @@ export class PreparationComponent implements OnInit {
 
   drop(event, i, j) {
     if (i > 0 && j > 0) {
+
+      const notEmptyPositions = Array.from(document.getElementsByClassName('coordinate-not-empty'))
+
+      const isFreePosition = (row, column) => {
+        return !notEmptyPositions.find(p => {
+          return p.id === `${row-1}-${column-1}`
+            || p.id === `${row-2}-${column-1}`
+            || p.id === `${row}-${column-1}`
+            || p.id === `${row-1}-${column-2}`
+            || p.id === `${row-1}-${column}`
+        })
+      }
+
+      if (!isFreePosition(i, j)) return
+
       event.preventDefault()
       let data = event.dataTransfer.getData("vessel-drag");
       const vessel = document.getElementById(data)
@@ -82,7 +101,16 @@ export class PreparationComponent implements OnInit {
 
       for (const map of vesselMap) {
         if (i + map.row > this.rows.length - 1 || j + map.column > this.columns.length - 1) return
+        if (!isFreePosition(i + map.row, j + map.column)) return
       }
+
+      this.startPositions.push({
+        id: vesselId,
+        startPosition: {
+          row: i - 1,
+          column: j - 1
+        }
+      })
       
       vessel.setAttribute('draggable', 'false')
       vessel.childNodes.forEach(vesselChildren => {
@@ -93,6 +121,17 @@ export class PreparationComponent implements OnInit {
       })
 
       const clearVessel = clickEvent => {
+
+        const startPosition = this.startPositions.find(s => {
+          return s.id === vesselId 
+            && s.startPosition.row === i - 1
+            && s.startPosition.column === j - 1
+        })
+
+        const startPositionIndex = this.startPositions.indexOf(startPosition)
+
+        this.startPositions.splice(startPositionIndex, 1)
+
         event.target.setAttribute('class', 'board-coordinate ' + this.getClassByCoordinate(i, j))
         event.target.onclick = null
         vesselMap.forEach(m => {
@@ -154,5 +193,20 @@ export class PreparationComponent implements OnInit {
     })
     if (isInPaintableCoordinates) return 'background-color: blue'
     return ''
+  }
+
+  confirmStartPositions() {
+    this.loading = true
+    const body = {
+      MatchId: this.matchId,
+      maritmeSpace: this.startPositions
+    }
+    this.gameService.confirmStartPositions(body).subscribe(resp => {
+      this.loading = false
+      this.notification.success('posições confirmadas!')
+    }, error => {
+      this.loading = false
+      this.httpService.HttpErrorHandler(error)
+    })
   }
 }

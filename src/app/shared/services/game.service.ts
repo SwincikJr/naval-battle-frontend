@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class GameService {
     
     public readonly baseEndpoint: string = `${environment.urlApi}/game`;
+    public readonly boardEndpoint: string = `${environment.urlApi}/board`;
 
     constructor(
         private httpClient: HttpClient,
@@ -45,5 +46,9 @@ export class GameService {
 
     getInfo(MatchId) {
         return this.httpClient.get(`${this.baseEndpoint}/info/${MatchId}`, { headers: this.getHeader() });
+    }
+
+    confirmStartPositions(body) {
+        return this.httpClient.post(`${this.boardEndpoint}`, body, { headers: this.getHeader() });
     }
 }
