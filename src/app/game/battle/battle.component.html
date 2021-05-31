@@ -10,6 +10,7 @@
                         *ngFor="let column of columnsArray; index as column_index"
                         [class]="getClassNameOfCoordinate(row_index, column_index)"
                     >
+                        {{ getBoardLabel(row_index, column_index) }}
                     </div>
                 </div>
             </div>
@@ -26,34 +27,189 @@
                         *ngFor="let column of columnsArray; index as column_index"
                         [class]="getClassNameOfCoordinate(row_index, column_index, true)"
                     >
+                        {{ getBoardLabel(row_index, column_index) }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding-top: 50px;">
+        <artemisia-button label="Desistir" (click)="giveUp()"></artemisia-button>
+    </div>
+
 </div>
 
 <ng-template #yourTurnModal>
-    <div class="start-match-modal">
-      <div class="start-match-modal-header">
+    <div class="battle-modal">
+      <div class="battle-modal-header">
         <h3>É a sua vez!</h3>
       </div>
-      <div style="padding: 15px;">
+      <div>
         <p>Escolha uma coordenada no tabuleiro de seu adversário para atacar.</p>
       </div>
-      <artemisia-button label="Entendi" (click)="closeYourTurnModal()"></artemisia-button>
+      <div class="battle-modal-button">
+        <artemisia-button label="Entendi" (click)="closeYourTurnModal()"></artemisia-button>
+      </div>
     </div>
 </ng-template>
 
 <ng-template #opponentTurnModal>
-    <div class="start-match-modal">
-      <div class="start-match-modal-header">
+    <div class="battle-modal">
+      <div class="battle-modal-header">
         <h3>É a vez do seu opponente!</h3>
       </div>
-      <div style="padding: 15px;">
+      <div>
         <p>Aguarde enquanto seu adversário realiza sua jogada.</p>
       </div>
-      <artemisia-button label="Entendi" (click)="closeOpponentTurnModal()"></artemisia-button>
+    </div>
+</ng-template>
+
+<ng-template #bombOnAttackModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Bomba!</h3>
+      </div>
+      <div>
+        <p>Você acertou uma embarcação na coordenada {{ attackedCoordinate }}. Jogue novamente.</p>
+      </div>
+      <div class="battle-modal-button">
+          <artemisia-button label="Entendi" (click)="closeBombOnAttackModal()"></artemisia-button>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #waterOnAttackModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Água!</h3>
+      </div>
+      <div>
+        <p>Não há embarcação na coordenada {{ attackedCoordinate }}. Aguarde enquanto seu adversário realiza sua jogada.</p>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #sankOnAttackModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Bomba, afundou!</h3>
+      </div>
+      <div>
+        <p>Você afundou uma embarcação na coordenada {{ attackedCoordinate }}. Jogue novamente.</p>
+      </div>
+      <div class="battle-modal-button">
+          <artemisia-button label="Entendi" (click)="closeSankOnAttackModal()"></artemisia-button>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #bombOnAttackedModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Bomba!</h3>
+      </div>
+      <div>
+        <p>O adversário acertou uma embarcação na coordenada {{ attackedCoordinate }}. Aguarde enquanto ele realiza uma nova jogada.</p>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #waterOnAttackedModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Água!</h3>
+      </div>
+      <div>
+        <p>Seu adevrsário não acertou nenhuma embarcação na coordenada {{ attackedCoordinate }}. É a sua vez de atacar.</p>
+      </div>
+      <div class="battle-modal-button">
+          <artemisia-button label="Entendi" (click)="closeWaterOnAttackedModal()"></artemisia-button>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #sankOnAttackedModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Bomba, afundou!</h3>
+      </div>
+      <div style="padding: 15px;">
+        <p>Seu adversário afundou uma embarcação na coordenada {{ attackedCoordinate }}. Aguarde enquanto ele realiza uma nova jogada.</p>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #victoryModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Vitória!</h3>
+      </div>
+      <div style="margin-bottom: 25px;">
+        <p>Você afundou todas as embarcações do adversário! Espólios recebidos:</p>
+        <div style="text-align: center; font-weight: bold;">{{ coins }} moedas</div>
+        <div style="text-align: center; font-weight: bold;">{{ score }} pontos</div>
+      </div>
+      <div class="battle-modal-button">
+          <artemisia-button label="Voltar ao convés" (click)="goToHome()"></artemisia-button>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #defeatModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Derrota!</h3>
+      </div>
+      <div>
+        <p>O adversário afundou todas as suas embarcações.</p>
+      </div>
+      <div class="battle-modal-button">
+          <artemisia-button label="Voltar ao convés" (click)="goToHome()"></artemisia-button>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #giveUpModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Tem certeza de deseja desistir?</h3>
+      </div>
+      <div class="battle-modal-button">
+          <artemisia-button label="Cancelar" (click)="cancelGiveUp()"></artemisia-button>
+      </div>
+      <div class="battle-modal-button">
+        <artemisia-button label="Desistir" (click)="confirmGiveUp()" [disabled]="givingUp" [loading]="givingUp"></artemisia-button>
+    </div>
+    </div>
+</ng-template>
+
+<ng-template #defeatByWithdrawalModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Derrota!</h3>
+      </div>
+      <div>
+        <p>Você desistiu da batalha.</p>
+      </div>
+      <div class="battle-modal-button">
+          <artemisia-button label="Voltar ao convés" (click)="goToHome()"></artemisia-button>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #victoryByWithdrawalModal>
+    <div class="battle-modal">
+      <div class="battle-modal-header">
+        <h3>Vitória!</h3>
+      </div>
+      <div style="margin-bottom: 25px;">
+        <p>O adversário desistiu! Espólios recebidos:</p>
+        <div style="text-align: center; font-weight: bold;">{{ coins }} moedas</div>
+        <div style="text-align: center; font-weight: bold;">{{ score }} pontos</div>
+      </div>
+      <div class="battle-modal-button">
+          <artemisia-button label="Voltar ao convés" (click)="goToHome()"></artemisia-button>
+      </div>
     </div>
 </ng-template>

@@ -7,6 +7,10 @@
 
 .row-indicator, .column-indicator {
     background-color: blueviolet;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .not-empty {
@@ -28,4 +32,19 @@
 
 .opponent-attacked, .attacked {
     background-color: gray;
+}
+
+.battle-modal {
+    padding: 25px;
+}
+
+.battle-modal-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.battle-modal-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

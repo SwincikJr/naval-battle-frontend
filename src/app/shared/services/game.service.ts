@@ -59,4 +59,8 @@ export class GameService {
     attack(matchId, row, column) {
         return this.httpClient.put(`${this.baseEndpoint}/battle/${matchId}`, { row, column }, { headers: this.getHeader() })
     }
+
+    giveUp(matchId) {
+        return this.httpClient.post(`${this.baseEndpoint}/giveup/${matchId}`, null, { headers: this.getHeader() })
+    }
 }
