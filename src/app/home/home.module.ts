@@ -14,7 +14,8 @@ import { HomeUserComponent } from './home-user/home-user.component';
 import { SocketService } from '../shared/services/socket.service'
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GameService } from '../shared/services/game.service'
-import { HttpService } from '../shared/services/http.service'
+import { HttpService } from '../shared/services/http.service';
+import { MarketComponent } from './market/market.component'
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HttpService } from '../shared/services/http.service'
     RecoveryComponent,
     ActivateComponent,
     HomeUserComponent,
+    MarketComponent,
   ],
   imports: [
     CommonModule,
