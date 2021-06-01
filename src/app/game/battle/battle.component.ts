@@ -231,8 +231,8 @@ export class BattleComponent implements OnInit {
   }
 
   closeVictoryModal() {
+    this.resetModalConfig()
     this.victoryModal.close()
-    this.victoryModal = null
   }
 
   openDefeatModal() {
@@ -241,8 +241,8 @@ export class BattleComponent implements OnInit {
   }
 
   closeDefeatModal() {
+    this.resetModalConfig()
     this.defeatModal.close()
-    this.defeatModal = null
   }
 
   openSankOnAttackModal() {
@@ -251,7 +251,6 @@ export class BattleComponent implements OnInit {
 
   closeSankOnAttackModal() {
     this.sankOnAttackModal.close()
-    this.sankOnAttackModal = null
   }
 
   openSankOnAttackedModal() {
@@ -262,7 +261,6 @@ export class BattleComponent implements OnInit {
   closeSankOnAttackedModal() {
     this.resetModalConfig()
     this.sankOnAttackedModal.close()
-    this.sankOnAttackedModal = null
   }
 
   openWaterOnAttackModal() {
@@ -273,7 +271,6 @@ export class BattleComponent implements OnInit {
   closeWaterOnAttackModal() {
     this.resetModalConfig()
     this.waterOnAttackModal.close()
-    this.waterOnAttackModal = null
   }
 
   openWaterOnAttackedModal() {
@@ -282,7 +279,6 @@ export class BattleComponent implements OnInit {
 
   closeWaterOnAttackedModal() {
     this.waterOnAttackedModal.close()
-    this.waterOnAttackedModal = null
   }
 
   openBombOnAttackModal() {
@@ -291,7 +287,6 @@ export class BattleComponent implements OnInit {
 
   closeBombOnAttackModal() {
     this.bombOnAttackModal.close()
-    this.bombOnAttackModal = null
   }
 
   openBombOnAttackedModal() {
@@ -302,7 +297,6 @@ export class BattleComponent implements OnInit {
   closeBombOnAttackedModal() {
     this.resetModalConfig()
     this.bombOnAttackedModal.close()
-    this.bombOnAttackedModal = null
   }
 
   startMove() {
