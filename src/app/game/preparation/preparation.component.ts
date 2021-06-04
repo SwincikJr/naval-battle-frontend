@@ -215,8 +215,11 @@ export class PreparationComponent implements OnInit {
     const isInPaintableCoordinates = paintableCoordinates.find(c => {
       return c.row === row_index && c.column === column_index
     })
-    if (isInPaintableCoordinates) return 'background-color: blue'
-    return ''
+    if (isInPaintableCoordinates) return `background-color:#ED8F03;
+                                          border: 1px solid black;
+                                          border-radius: 4px;
+                                          cursor: pointer;`;
+    return 'background: none; border: none;'
   }
 
   confirmStartPositions() {

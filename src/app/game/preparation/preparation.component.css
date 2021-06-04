@@ -1,7 +1,136 @@
-#board-area {
+@font-face{
+    font-family: Sigmar One;
+    src: url(../../../assets/fonts/SigmarOne-Regular.ttf) format('truetype');
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.bg{
+    background-image: url("../../../assets/SEA.gif");
+    overflow: hidden;
+    background-size: cover;
+    height: 100vh;
+}
+
+.grid{
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+    grid-template-rows: 10vh 79vh 9vh;
+    grid-gap: 1vh;
+    grid-template-areas: "h h"
+                         "e d"
+                         "f f";
+}
+
+header{
+    width: 100%;
+    grid-area: h;
+}
+
+main{
+    width: 100%;
+    display: block;
+    grid-area: e;
+}
+
+aside{
+    width: 100%;
+    grid-area: d;
+}
+
+footer{
+    width: 100%;
+    grid-area: f;
+}
+
+header h1{
+    padding-top: 20px;
+    font-family: 'Sigmar One', cursive;
+    text-shadow: .3rem .4rem 2px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.vessels-area{
+    background-image: url("../../../assets/wood.jpg");
+    background-size:cover;
+    border: 5px solid #5f3516;
+    border-radius: 15px;
+    margin: 0 auto;
+    float:right;
+    margin:5px;
     width: fit-content;
     height: fit-content;
-    float: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.coordinate-not-empty {
+    background-color: #ED8F03;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.vessels-avaliable{
+    margin:0;
+    padding: 0;
+    clear: both;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.vessels-avaliable > .vessel-name{
+    padding: 0;
+    font-family: 'Sigmar One', cursive;
+    color: #FFD700;
+    text-shadow: .3rem .4rem 2px rgba(0,0,0,0.4);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
+    font-size: 1.8rem;
+    line-height: 1.7rem;
+    float: left; 
+}
+
+.vessels-avaliable > .vessel-type{
+    width: fit-content;
+    height: fit-content;
+    float: left; 
+}
+
+.column-address, .row-address {
+    background-color: #FFD700;
+    color: black;
+    border: 2px solid #b15310;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#board-area {
+    background-image: url("../../../assets/wood.jpg");
+    background-size: 100%;
+    max-height: 500px;
+    border: 5px solid #5f3516;
+    border-radius: 15px;
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+    float:left;
+
+}
+
+#board-area .playable-coordinate {
+    background-color: #5f3516;
+    border: 1px solid black;
+    border-radius: 4px;
+    opacity: 0.5;
 }
 
 .board-coordinate {
@@ -12,16 +141,44 @@
     margin: 1.5px;
 }
 
-.column-address, .row-address {
-    background-color: blueviolet;
-    color: white;
+.btn-confirma{
+    margin-left: 33%;
+    margin-right: 33%;
+
 }
 
-.playable-coordinate {
-    border: 1px solid black;
+.start-match-modal{
+    background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
+    color:white;
+    font-family: 'Sigmar One', cursive;
 }
 
-.coordinate-not-empty {
-    background-color: blue;
-    cursor: pointer;
+@media (max-width: 925px){
+    .grid{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-gap: 1vh;
+    grid-template-areas: "h"
+                         "e" 
+                         "d"
+                         "f";
+    }
+
+    #board-area{
+        float:none;
+        height: 100vh;
+        margin: 0 auto;
+    }
+    .vessels-area{
+        float:none;
+        margin: 0 auto;
+    }
+
+    .bg{
+        overflow: auto;
+    }
+
+    .btn-confirma{
+        margin: 20%;
+    }
 }
