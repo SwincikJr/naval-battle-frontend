@@ -1,3 +1,23 @@
+@font-face{
+    font-family: Sigmar One;
+    src: url(../../../assets/fonts/SigmarOne-Regular.ttf) format('truetype');
+
+}
+
+h1{
+    padding-top: 20px;
+    font-family: 'Sigmar One', cursive;
+    text-shadow: .3rem .4rem 2px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.bg{
+    background-image: url("../../../assets/SEA.gif");
+    overflow: hidden;
+    background-size: cover;
+    height: 100vh;
+}
+
 .coordinate {
     height: 25px;
     width: 25px;
@@ -35,6 +55,12 @@
 }
 
 .battle-modal {
+    background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
+    color:white;
+    font-size: 1.3rem;
+    font-family: 'Sigmar One', cursive;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
     padding: 25px;
 }
 

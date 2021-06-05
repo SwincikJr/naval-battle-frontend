@@ -68,6 +68,7 @@ header h1{
     height: fit-content;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
 }
 
 
@@ -116,7 +117,6 @@ header h1{
 #board-area {
     background-image: url("../../../assets/wood.jpg");
     background-size: 100%;
-    max-height: 500px;
     border: 5px solid #5f3516;
     border-radius: 15px;
     margin: 0 auto;
@@ -142,15 +142,19 @@ header h1{
 }
 
 .btn-confirma{
-    margin-left: 33%;
-    margin-right: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
 .start-match-modal{
     background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
     color:white;
+    font-size: 1.3rem;
     font-family: 'Sigmar One', cursive;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
 }
 
 @media (max-width: 925px){
@@ -166,7 +170,7 @@ header h1{
 
     #board-area{
         float:none;
-        height: 100vh;
+        height: 71vh;
         margin: 0 auto;
     }
     .vessels-area{

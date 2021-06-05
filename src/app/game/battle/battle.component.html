@@ -1,11 +1,18 @@
-<div style="width: 100%;">
+<div style="width: 100%;" class="bg">
+
+  <div class="grid">
+
+    
+
+  </div>
 
     <div style="max-width: 50%; width: 50%; float: left;">
         <h1 style="text-align: center;">Você</h1>
-        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+        <div style="width: fit-content; display: flex; align-items: center; justify-content: center;">
             <div [style]="getHeightOfBoard()">
                 <div *ngFor="let row of rowsArray; index as row_index" [style]=getRowStyle()>
                     <div
+                    
                         id="myboard-{{row_index - 1}}-{{column_index - 1}}"
                         *ngFor="let column of columnsArray; index as column_index"
                         [class]="getClassNameOfCoordinate(row_index, column_index)"
@@ -19,7 +26,7 @@
 
     <div style="max-width: 50%; width: 50%; float: left;">
         <h1 style="text-align: center;">Oponente</h1>
-        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+        <div style=" width: 100%; display: flex; align-items: center; justify-content: center;">
             <div [style]="getHeightOfBoard()">
                 <div *ngFor="let row of rowsArray; index as row_index" [style]=getRowStyle()>
                     <div 
@@ -60,7 +67,7 @@
         <h3>É a vez do seu opponente!</h3>
       </div>
       <div>
-        <p>Aguarde enquanto seu adversário realiza sua jogada.</p>
+        <p>Aguarde enquanto seu adversário realiza a jogada.</p>
       </div>
     </div>
 </ng-template>
@@ -85,7 +92,7 @@
         <h3>Água!</h3>
       </div>
       <div>
-        <p>Não há embarcação na coordenada {{ attackedCoordinate }}. Aguarde enquanto seu adversário realiza sua jogada.</p>
+        <p>Não há embarcação na coordenada {{ attackedCoordinate }}. Aguarde enquanto seu adversário realiza a jogada.</p>
       </div>
     </div>
 </ng-template>
