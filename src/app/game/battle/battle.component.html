@@ -2,13 +2,10 @@
 
   <div class="grid">
 
-    
-
-  </div>
-
-    <div style="max-width: 50%; width: 50%; float: left;">
+    <header>
+      <div style=" width: 100%; height: 100vh;">
         <h1 style="text-align: center;">Você</h1>
-        <div style="width: fit-content; display: flex; align-items: center; justify-content: center;">
+        <div class="main-board">
             <div [style]="getHeightOfBoard()">
                 <div *ngFor="let row of rowsArray; index as row_index" [style]=getRowStyle()>
                     <div
@@ -23,10 +20,12 @@
             </div>
         </div>
     </div>
+    </header>
 
-    <div style="max-width: 50%; width: 50%; float: left;">
+    <main>
+      <div style="width: 100%; height: 100vh;">
         <h1 style="text-align: center;">Oponente</h1>
-        <div style=" width: 100%; display: flex; align-items: center; justify-content: center;">
+        <div class="enemy-board">
             <div [style]="getHeightOfBoard()">
                 <div *ngFor="let row of rowsArray; index as row_index" [style]=getRowStyle()>
                     <div 
@@ -39,11 +38,21 @@
                 </div>
             </div>
         </div>
-    </div>
+      </div>
+    </main>
 
-    <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding-top: 50px;">
+    <footer>
+      <div style="display: flex; align-items: center; justify-content: center; padding-top: 10px;">
         <artemisia-button label="Desistir" (click)="giveUp()"></artemisia-button>
     </div>
+    </footer>
+    
+
+  
+
+    </div>
+
+
 
 </div>
 
@@ -78,7 +87,7 @@
         <h3>Bomba!</h3>
       </div>
       <div>
-        <p>Você acertou uma embarcação na coordenada {{ attackedCoordinate }}. Jogue novamente.</p>
+        <p>Você acertou uma embarcação na coordenada {{ attackedCoordinate }}. <br> Jogue novamente.</p>
       </div>
       <div class="battle-modal-button">
           <artemisia-button label="Entendi" (click)="closeBombOnAttackModal()"></artemisia-button>
@@ -92,7 +101,7 @@
         <h3>Água!</h3>
       </div>
       <div>
-        <p>Não há embarcação na coordenada {{ attackedCoordinate }}. Aguarde enquanto seu adversário realiza a jogada.</p>
+        <p>Não há embarcação na coordenada {{ attackedCoordinate }}.<br> Aguarde enquanto seu adversário realiza a jogada.</p>
       </div>
     </div>
 </ng-template>
@@ -103,7 +112,7 @@
         <h3>Bomba, afundou!</h3>
       </div>
       <div>
-        <p>Você afundou uma embarcação na coordenada {{ attackedCoordinate }}. Jogue novamente.</p>
+        <p>Você afundou uma embarcação na coordenada {{ attackedCoordinate }}. <br>Jogue novamente.</p>
       </div>
       <div class="battle-modal-button">
           <artemisia-button label="Entendi" (click)="closeSankOnAttackModal()"></artemisia-button>
@@ -117,7 +126,7 @@
         <h3>Bomba!</h3>
       </div>
       <div>
-        <p>O adversário acertou uma embarcação na coordenada {{ attackedCoordinate }}. Aguarde enquanto ele realiza uma nova jogada.</p>
+        <p>O adversário acertou uma embarcação na coordenada {{ attackedCoordinate }}.<br> Aguarde enquanto ele realiza uma nova jogada.</p>
       </div>
     </div>
 </ng-template>
@@ -128,7 +137,7 @@
         <h3>Água!</h3>
       </div>
       <div>
-        <p>Seu adevrsário não acertou nenhuma embarcação na coordenada {{ attackedCoordinate }}. É a sua vez de atacar.</p>
+        <p>Seu adevrsário não acertou nenhuma embarcação na coordenada {{ attackedCoordinate }}.<br> É a sua vez de atacar.</p>
       </div>
       <div class="battle-modal-button">
           <artemisia-button label="Entendi" (click)="closeWaterOnAttackedModal()"></artemisia-button>
@@ -142,7 +151,7 @@
         <h3>Bomba, afundou!</h3>
       </div>
       <div style="padding: 15px;">
-        <p>Seu adversário afundou uma embarcação na coordenada {{ attackedCoordinate }}. Aguarde enquanto ele realiza uma nova jogada.</p>
+        <p>Seu adversário afundou uma embarcação na coordenada {{ attackedCoordinate }}.<br> Aguarde enquanto ele realiza uma nova jogada.</p>
       </div>
     </div>
 </ng-template>

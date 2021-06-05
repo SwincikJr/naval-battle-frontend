@@ -35,7 +35,6 @@ header{
 
 main{
     width: 100%;
-    display: block;
     grid-area: e;
 }
 
@@ -51,8 +50,11 @@ footer{
 
 header h1{
     padding-top: 20px;
+    color: white;
     font-family: 'Sigmar One', cursive;
     text-shadow: .3rem .4rem 2px rgba(0,0,0,0.2);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000;
     text-align: center;
 }
 
@@ -62,13 +64,21 @@ header h1{
     border: 5px solid #5f3516;
     border-radius: 15px;
     margin: 0 auto;
-    float:right;
-    margin:5px;
     width: fit-content;
-    height: fit-content;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 5px;
+}
+
+.board-area {
+    background-image: url("../../../assets/wood.jpg");
+    background-size: cover;
+    border: 5px solid #5f3516;
+    border-radius: 15px;
+    margin: 0 auto;
+    width: fit-content;
+    display: grid;
+
 }
 
 
@@ -84,7 +94,6 @@ header h1{
     margin:0;
     padding: 0;
     clear: both;
-    height: fit-content;
     display: grid;
     grid-template-columns: 1fr;
 }
@@ -114,19 +123,7 @@ header h1{
     cursor: pointer;
 }
 
-#board-area {
-    background-image: url("../../../assets/wood.jpg");
-    background-size: 100%;
-    border: 5px solid #5f3516;
-    border-radius: 15px;
-    margin: 0 auto;
-    width: fit-content;
-    height: fit-content;
-    float:left;
-
-}
-
-#board-area .playable-coordinate {
+.board-area .playable-coordinate {
     background-color: #5f3516;
     border: 1px solid black;
     border-radius: 4px;
@@ -167,22 +164,11 @@ header h1{
                          "d"
                          "f";
     }
-
-    #board-area{
-        float:none;
-        height: 71vh;
-        margin: 0 auto;
-    }
     .vessels-area{
-        float:none;
-        margin: 0 auto;
+        height: fit-content;
     }
 
     .bg{
         overflow: auto;
-    }
-
-    .btn-confirma{
-        margin: 20%;
     }
 }

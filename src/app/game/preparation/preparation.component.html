@@ -5,15 +5,18 @@
         </header>
 
         <main>
-            <div class="vessels-area">
-                <div *ngFor="let vessel of vessels; index as v" id="{{v}}-{{vessel.id}}" class="vessels-avaliable">
-                    <div class="vessel-name">{{ vessel.label }}</div>
-                    <div id="{{v}}-{{vessel.id}}-area" class="vessel-type" (dragstart)="drag($event)" draggable="true">
-                        <div *ngFor="let row of getRowsNumberOfMap(vessel.map); index as row_index">
-                            <div id="{{v}}-{{vessel.id}}-{{row_index}}-{{column_index}}"
-                                *ngFor="let column of getColumnsNumberOfMap(vessel.map); index as column_index"
-                                class="board-coordinate playable-coordinate"
-                                [style]="getStyleOfVessel(row_index, column_index, vessel.map)">
+            <div style=" width: 100%;">
+                <div class="vessels-area">
+                    <div *ngFor="let vessel of vessels; index as v" id="{{v}}-{{vessel.id}}" class="vessels-avaliable">
+                        <div class="vessel-name">{{ vessel.label }}</div>
+                        <div id="{{v}}-{{vessel.id}}-area" class="vessel-type" (dragstart)="drag($event)"
+                            draggable="true">
+                            <div *ngFor="let row of getRowsNumberOfMap(vessel.map); index as row_index">
+                                <div id="{{v}}-{{vessel.id}}-{{row_index}}-{{column_index}}"
+                                    *ngFor="let column of getColumnsNumberOfMap(vessel.map); index as column_index"
+                                    class="board-coordinate playable-coordinate"
+                                    [style]="getStyleOfVessel(row_index, column_index, vessel.map)">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -22,12 +25,15 @@
         </main>
 
         <aside>
-            <div id="board-area">
-                <div *ngFor="let row of rows; index as i">
-                    <div *ngFor="let column of columns; index as j"
-                        class="board-coordinate {{ getClassByCoordinate(i, j) }}" (dragover)="allowDrop($event, i, j)"
-                        (drop)="drop($event, i, j)" id="{{ getCoordinateId(i, j) }}">
-                        {{ getCoordinateContent(i, j) }}
+            <div style=" width: 100%; height: fit-100vh;">
+                <div class="board-area">
+                    <div *ngFor="let row of rows; index as i">
+                        <div *ngFor="let column of columns; index as j"
+                            class="board-coordinate {{ getClassByCoordinate(i, j) }}"
+                            (dragover)="allowDrop($event, i, j)" (drop)="drop($event, i, j)"
+                            id="{{ getCoordinateId(i, j) }}">
+                            {{ getCoordinateContent(i, j) }}
+                        </div>
                     </div>
                 </div>
             </div>
