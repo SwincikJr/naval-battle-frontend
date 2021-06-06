@@ -116,13 +116,14 @@ a:link {
   flex: 1;
 } */
 
-/* .text-ranking h2 {
+.text-ranking h2 {
   font-size: 40px;
   display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
-} */
+} 
+
 
 .ranking-display {
   width: 94%;
