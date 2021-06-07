@@ -27,13 +27,16 @@
           <p class="navbar-text">Olá, {{ username }}!</p>
         </a>
 
-        <a href="#">
-          <img src="../assets/settings.png" class="navbar-ico" />
-        </a>
-
+        <div class="dropdown">
+            <img src="../assets/settings.png" class="navbar-ico" />
+            <div class="dropdown-content">
+              <a href="#">Excluir Conta</a>
+            </div>
+        </div>
       </div>
     </div>
-    
+
+
     <div class="user-home-ranking-area">
       <div class="user-home-ranking-area-display">
         <div class="text-ranking">
@@ -75,7 +78,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 <ng-template #startMatchModal>
   <div class="start-match-modal">
