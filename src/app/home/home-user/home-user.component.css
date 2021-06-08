@@ -200,3 +200,51 @@ a:link {
 .dropdown-content:hover{
   background:#52b8d1 ;
 }
+
+/* ======================== Modal advertisement ======================== */
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-advertisement {
+  background-image: url("../../../assets/parchmentAdvert.png");
+  width: 600px;
+  height: 550px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 5vh auto;
+  position: relative;
+}
+
+.modal-advertisement .close-modal-advertisement {
+  position: absolute;
+  top: 32px;
+  right: 40px;
+  cursor: pointer;
+}
+
+/* ========== Modal advertisement active ========== */
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.main-advertisement-content {
+  width: 70%;
+  height: 80%;
+  position: static;
+  margin: auto;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+}

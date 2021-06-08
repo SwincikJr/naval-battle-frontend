@@ -201,4 +201,11 @@ export class HomeUserComponent implements OnInit {
       this.httpService.HttpErrorHandler(error)
     })
   }
+
+  closeModalAdvertisement() {
+    const modalOverlay = document.querySelector('.modal-overlay');
+    document.querySelector(".close-modal-advertisement").addEventListener("click", function() {
+      modalOverlay.classList.remove("active");
+    })
+  }
 } 
