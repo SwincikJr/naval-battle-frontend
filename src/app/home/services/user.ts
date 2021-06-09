@@ -61,4 +61,9 @@ export class UserService {
         if (!this.authenticated) this.loadAuthenticatedByLocalStorage()
         return this.authenticated
     }
+
+    guest(username){
+        username = username + ".Visitante"
+        return this.http.post<any>(`${this.url}/guest/user`, { username })
+    }
 }

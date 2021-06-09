@@ -1,0 +1,5 @@
+<form [formGroup]="guestForm" (ngSubmit)="onSubmit()">
+    <artemisia-input [formGroup]="guestForm" formPropertyName="guest" placeholder="Nickname" type="text"></artemisia-input>
+    <div *ngIf="guestError" class="artemisia-form-field-error">{{ guestErrorLabel }}</div>
+    <artemisia-button label="Entrar" [disabled]="!guestForm.valid || loading" [loading]="loading"></artemisia-button>
+</form>

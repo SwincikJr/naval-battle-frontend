@@ -11,8 +11,21 @@
 }
 
 .home-options-area {
-    width: 100%;
+    width:100%;
     height: 50px;
+}
+
+.home-options-area > div{
+    margin: 10px;
+    text-decoration: none;
+    padding: 0 10px;
+    border-radius: 10px;
+    background-color:rgba(176, 196, 222, 0.2);
+}
+
+.home-options-area > div:hover{
+    background-color: #000080;
+    color: white;
 }
 
 .home-option {
@@ -23,10 +36,6 @@
     float: left;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     cursor: pointer;
-}
-
-.home-option:hover {
-    text-decoration: underline;
 }
 
 .home-logo-area {

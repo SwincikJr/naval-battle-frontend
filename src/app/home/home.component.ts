@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   loginClass = ''
   registerClass = ''
   recoveryClass = ''
+  guestClass = ''
 
   private loginActiveOption = {
     id: 'login',
@@ -39,10 +40,16 @@ export class HomeComponent implements OnInit {
     label: 'Contato'
   }
 
+  private guestActiveOption = {
+    id: 'guest',
+    label: 'Convidado'
+  }
+
   private primaryOptions = [
     { id: 'register', label: 'novo cadastro' },
     { id: 'recovery', label: 'esqueci minha senha' },
-    { id: 'contacts', label: 'contato' }
+    { id: 'contacts', label: 'contato' },
+    { id : 'guest', label: 'Convidado'}
   ]
 
   private secondaryOptions = [
