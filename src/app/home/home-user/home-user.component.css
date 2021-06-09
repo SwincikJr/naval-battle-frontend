@@ -20,13 +20,16 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  padding-left:10px;
 }
 
 .navbar-ico {
   width: 50px;
   height: 50px;
   padding: 8px;
+}
+
+.navbar-ico:hover{
+  background:#52b8d1;
 }
 
 .navbar-text {
