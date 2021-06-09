@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment'
 import { User } from '../../shared/interfaces/user'
+import { accessSync } from 'fs';
 
 @Injectable({
     providedIn: "root",
@@ -29,6 +30,14 @@ export class UserService {
                 console.error(error)
                 this.authenticated = null;
             }
+        }
+    }
+
+    private getHeader()  {
+        const token = this.getAuthenticated().token
+        const auth = `Bearer ${token}`
+        return {
+            'Authorization': auth
         }
     }
 
@@ -63,7 +72,17 @@ export class UserService {
     }
 
     guest(username){
-        username = username + ".Visitante"
+        username = "Visitante."+ username
         return this.http.post<any>(`${this.url}/guest/user`, { username })
+    }
+
+    deleteGuest(){
+        return this.http.delete<any>(`${this.url}/delete/guest`,{ headers : this.getHeader()})
+    }
+
+    clearLocalStorage(){
+        localStorage.clear()
+        location.reload()
+
     }
 }

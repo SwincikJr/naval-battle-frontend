@@ -248,3 +248,9 @@ a:link {
   align-items: center;
   font-size: 48px;
 }
+
+/* ========================= Logout ======================*/
+
+.logout{
+  cursor: pointer;
+}

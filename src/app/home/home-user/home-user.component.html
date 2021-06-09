@@ -1,10 +1,12 @@
 <div class="user-home-background">
   <div class="user-home-content-area">
     <div class="user-home-navbar">
+
+
       <div class="home-navbar-left">
-        <a href="#">
+        <div class="logout" (click)="openLogoutModal()">
           <img src="../assets/logout.png" class="navbar-ico" />
-        </a>
+        </div>
       </div>
       <div class="home-navbar-right">
 
@@ -176,6 +178,7 @@
       ></artemisia-button>
     </div>
   </div>
+
 </ng-template>
 <div class="modal-overlay active">
   <div class="modal-advertisement">
@@ -186,3 +189,23 @@
     <div class="main-advertisement-content">Anúncio Aqui</div>
   </div>
 </div>
+
+<ng-template #logoutModal>
+  <div class="start-match-modal">
+    <div class="start-match-modal-header">
+      <h2>Deseja Realmente sair?</h2>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Sim" 
+        (click)="logout()"
+      ></artemisia-button>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Não" 
+        (click)="cancelLogout()"
+      ></artemisia-button>
+    </div>
+  </div>
+</ng-template>
