@@ -231,6 +231,10 @@ a:link {
   cursor: pointer;
 }
 
+.close-modal-advertisement img{
+  margin-top: 15px;
+}
+
 /* ========== Modal advertisement active ========== */
 
 .modal-overlay.active {

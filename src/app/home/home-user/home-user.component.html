@@ -5,13 +5,13 @@
 
       <div class="home-navbar-left">
         <div class="logout" (click)="openLogoutModal()">
-          <img src="../assets/logout.png" class="navbar-ico" />
+          <img src="../assets/logout.png" class="navbar-ico" title="Sair" />
         </div>
       </div>
       <div class="home-navbar-right">
 
         <a href="#">
-          <img src="../assets/shopping-cart.png" class="navbar-ico" alt="carrinho" />
+          <img src="../assets/shopping-cart.png" class="navbar-ico navbar-text" alt="carrinho" />
         </a>
 
         <a href="#" class="icon-content">
@@ -182,9 +182,8 @@
 </ng-template>
 <div class="modal-overlay active">
   <div class="modal-advertisement">
-    <a class="close-modal-advertisement"
-      (click)="closeModalAdvertisement()">
-      <img src="../../../assets/closeIcon.png" alt="fechar">
+    <a class="close-modal-advertisement">
+      <img src="../../../assets/closeIcon.png" (click)="closeModalAdvertisement()" alt="fechar">
     </a>
     <div class="main-advertisement-content">Anúncio Aqui</div>
   </div>
