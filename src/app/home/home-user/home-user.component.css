@@ -24,10 +24,13 @@
 }
 
 .navbar-ico {
-  width: 30px;
+  width: 50px;
+  height: 50px;
+  padding: 8px;
 }
 
 .navbar-text {
+  margin: 0 auto;
   color: black;
   font-size: 20px;
   text-decoration: none;
@@ -173,11 +176,6 @@ a:link {
   height: 50px; 
 }
 
-.dropdown img{
-  width: 50px;
-  height: 50px;
-  padding: 8px;
-}
 
 .dropdown-content {
   float: right;
