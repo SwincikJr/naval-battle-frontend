@@ -27,6 +27,8 @@ export class BattleComponent implements OnInit {
   coins = 0;
   score = 0;
   givingUp = false;
+  rightShotCount = 3;
+  executingRightShot = false;
 
   @ViewChild('yourTurnModal')
   private yourTurnModalTemplate: TemplateRef<any>;
@@ -67,6 +69,9 @@ export class BattleComponent implements OnInit {
   @ViewChild('victoryByWithdrawalModal')
   private victoryByWithdrawalModalTemplate: TemplateRef<any>;
 
+  @ViewChild('rightShotModal')
+  private rightShotModalTemplate: TemplateRef<any>;
+
   private yourTurnModal: NgbModalRef;
   private opponentTurnModal: NgbModalRef;
   private bombOnAttackModal: NgbModalRef;
@@ -80,6 +85,7 @@ export class BattleComponent implements OnInit {
   private giveUpModal: NgbModalRef;
   private defeatByWithdrawalModal: NgbModalRef;
   private victoryByWithdrawalModal: NgbModalRef;
+  private rightShotModal: NgbModalRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -96,6 +102,7 @@ export class BattleComponent implements OnInit {
       this.matchId = params.id
       this.gameService.getBattle(this.matchId).subscribe((resp: any) => {
         console.log(resp)
+        this.rightShotCount = resp.diamonds < resp.yourBoard.rightShot ? resp.diamonds : resp.yourBoard.rightShot
         this.attackedCoordinates = resp.yourBoard.attackedCoordinates
         this.opponentAttackedCoordinates = resp.opponentBoard.attackedCoordinates
         this.vessels = resp.yourBoard.vessels
@@ -214,6 +221,7 @@ export class BattleComponent implements OnInit {
     if (this.bombOnAttackedModal) this.closeBombOnAttackedModal()
     if (this.waterOnAttackedModal) this.closeWaterOnAttackedModal()
     if (this.sankOnAttackedModal) this.closeSankOnAttackedModal()
+    if (this.rightShotModal) this.closeRightShotModal()
   }
 
   goToHome() {
@@ -223,6 +231,14 @@ export class BattleComponent implements OnInit {
     if (this.victoryByWithdrawalModal) this.victoryByWithdrawalModal.close()
     if (this.defeatByWithdrawalModal) this.defeatByWithdrawalModal.close()
     this.router.navigateByUrl('/home')
+  }
+
+  openRightShotModal() {
+    this.rightShotModal = this.modalService.open(this.rightShotModalTemplate)
+  }
+
+  closeRightShotModal() {
+    this.rightShotModal.close()
   }
 
   openVictoryModal() {
@@ -393,6 +409,45 @@ export class BattleComponent implements OnInit {
       this.defeatByWithdrawalModal = this.modalService.open(this.defeatByWithdrawalModalTemplate)
     }, error => {
       this.givingUp = false
+      this.httpService.HttpErrorHandler(error)
+    })
+  }
+
+  confirmRightShot() {
+    this.executingRightShot = true;
+    this.gameService.rightShot(this.matchId).subscribe((resp: any) => {
+
+      this.executingRightShot = false;
+      this.closeAllModal()
+
+      this.attackedCoordinate = `${String.fromCharCode(65 + parseInt(resp.row))} - ${parseInt(resp.column) + 1}`
+
+      if (resp.victory) {
+        
+        this.coins = resp.coins
+        this.score = resp.score
+
+        this.openVictoryModal()
+
+      } else if (resp.sanked) {
+
+        this.openSankOnAttackModal()
+      
+      } else {
+        this.openBombOnAttackModal()
+      }
+
+      this.rightShotCount = this.rightShotCount - 1
+
+      document.getElementById(`${resp.row}-${resp.column}`)
+      document.getElementById(`${resp.row}-${resp.column}`).setAttribute('class', 'coordinate opponent-not-empty')
+      this.startMove()
+
+    }, error => {
+
+      this.executingRightShot = false;;
+      this.closeRightShotModal()
+      this.rightShotCount = 0
       this.httpService.HttpErrorHandler(error)
     })
   }

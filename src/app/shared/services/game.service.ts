@@ -63,4 +63,8 @@ export class GameService {
     giveUp(matchId) {
         return this.httpClient.post(`${this.baseEndpoint}/giveup/${matchId}`, null, { headers: this.getHeader() })
     }
+
+    rightShot(matchId) {
+        return this.httpClient.post(`${this.baseEndpoint}/rightShot/${matchId}`, null, { headers: this.getHeader() })
+    }
 }

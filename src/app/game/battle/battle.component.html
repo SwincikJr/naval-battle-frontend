@@ -42,9 +42,14 @@
     </main>
 
     <footer>
-      <div style="display: flex; align-items: center; justify-content: center; padding-top: 10px;">
-        <artemisia-button label="Desistir" (click)="giveUp()"></artemisia-button>
-    </div>
+      <div style="width: 100%">
+        <div style="display: flex; align-items: center; justify-content: center; padding-top: 10px; width: 50%; float: left;">
+          <artemisia-button label="Tiro certo: {{ rightShotCount }}" [disabled]="rightShotCount == 0" (click)="openRightShotModal()"></artemisia-button>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding-top: 10px; width: 50%; float: left;">
+          <artemisia-button label="Desistir" (click)="giveUp()"></artemisia-button>
+        </div>
+      </div>
     </footer>
     
 
@@ -228,4 +233,21 @@
           <artemisia-button label="Voltar ao convés" (click)="goToHome()"></artemisia-button>
       </div>
     </div>
+</ng-template>
+
+<ng-template #rightShotModal>
+  <div class="battle-modal">
+    <div class="battle-modal-header">
+      <h3>Tiro certo!</h3>
+    </div>
+    <div style="margin-bottom: 25px;">
+      <p>Atenção: este movimento custará 1 de seus diamantes. Confirma a ação, capitão?</p>
+    </div>
+    <div class="battle-modal-button">
+        <artemisia-button label="Sim, gaste 1 dos meus diamantes!" [disabled]="executingRightShot" [loading]="executingRightShot" (click)="confirmRightShot()"></artemisia-button>
+    </div>
+    <div class="battle-modal-button">
+      <artemisia-button label="Cancelar" [disabled]="executingRightShot" (click)="closeRightShotModal()"></artemisia-button>
+  </div>
+  </div>
 </ng-template>
