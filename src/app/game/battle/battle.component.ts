@@ -112,6 +112,7 @@ export class BattleComponent implements OnInit {
         this.rowsArray = new Array(this.rows + 1)
         this.columnsArray = new Array(this.columns + 1)
         this.moving = resp.moving
+        this.playSound('battle')
         if (this.moving) {
           this.openYourTurnModal()
         } else {
@@ -127,6 +128,7 @@ export class BattleComponent implements OnInit {
   }
 
   victoryEvent(data) {
+    this.playSound('victory')
     this.closeAllModal()
     this.coins = data.coins
     this.score = data.score
@@ -144,16 +146,20 @@ export class BattleComponent implements OnInit {
     if (data.hit) {
 
       if (data.defeat) {
+        this.playSound('defeat')
         this.openDefeatModal()
       } else if (data.sanked) {
+        this.playSound('bomb')
         this.openSankOnAttackedModal()
       } else {
+        this.playSound('bomb')
         this.openBombOnAttackedModal()
       }
 
       coordinate.setAttribute('class', 'coordinate destroyed')
 
     } else {
+      this.playSound('water')
       coordinate.setAttribute('class', 'coordinate attacked')
       this.openWaterOnAttackedModal()
       this.startMove()
@@ -182,19 +188,23 @@ export class BattleComponent implements OnInit {
           this.score = resp.score
 
           this.openVictoryModal()
+          this.playSound('victory')
 
         } else if (resp.sanked) {
 
           this.openSankOnAttackModal()
+          this.playSound('bomb')
         
         } else {
           this.openBombOnAttackModal()
+          this.playSound('bomb')
         }
 
         event.target.setAttribute('class', 'coordinate opponent-not-empty')
         this.startMove()
 
       } else {
+        this.playSound('water')
         event.target.setAttribute('class', 'coordinate opponent-attacked')
         this.openWaterOnAttackModal()
       }
@@ -404,6 +414,7 @@ export class BattleComponent implements OnInit {
     this.givingUp = true
     this.gameService.giveUp(this.matchId).subscribe(resp => {
       this.givingUp = false
+      this.playSound('defeat')
       this.cancelGiveUp()
       this.configStaticModal()
       this.defeatByWithdrawalModal = this.modalService.open(this.defeatByWithdrawalModalTemplate)
@@ -427,14 +438,17 @@ export class BattleComponent implements OnInit {
         this.coins = resp.coins
         this.score = resp.score
 
+        this.playSound('victory')
         this.openVictoryModal()
 
       } else if (resp.sanked) {
 
         this.openSankOnAttackModal()
+        this.playSound('bomb')
       
       } else {
         this.openBombOnAttackModal()
+        this.playSound('bomb')
       }
 
       this.rightShotCount = this.rightShotCount - 1
@@ -450,5 +464,21 @@ export class BattleComponent implements OnInit {
       this.rightShotCount = 0
       this.httpService.HttpErrorHandler(error)
     })
+  }
+
+  playSound(effect) {
+
+    const sounds = {
+      bomb: 'bomb.wav',
+      water: 'water.wav',
+      battle: 'battle.wav',
+      victory: 'victory.wav',
+      defeat: 'defeat.mp3'
+    }
+
+    const audio = new Audio()
+    audio.src = `../../../assets/sounds/${sounds[effect]}`
+    audio.load()
+    audio.play()
   }
 }
