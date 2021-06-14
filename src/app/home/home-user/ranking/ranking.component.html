@@ -1,0 +1,21 @@
+<div *ngIf="rank">
+  <div>
+    <table>
+      <tr>
+        <td class="cell_rank_ico"> <img class="png-icon" src="../assets/number_{{defineIcon(this.rank.myScore[0].pos)}}.png" style="width: 28px; height: 28px;"></td>
+        <td class="cell_rank_name">{{this.rank.myScore[0].username}}</td>
+        <td class="cell_rank_value">{{this.rank.myScore[0].score}}</td>
+      </tr>
+      <tr><td class="cell_void_line"></td></tr>
+      <tr *ngFor="let p of this.rank.ranking; let i=index">
+        <td class="cell_rank_ico"> <img class="png-icon" src="../assets/number_{{defineIcon(p.pos)}}.png" style="width: 28px; height: 28px;"></td>
+        <td class="cell_rank_name">{{p.username}}</td>
+        <td class="cell_rank_value">{{p.score}}</td>
+      </tr>
+    </table>
+    </div>
+ </div>
+ <div>
+
+</div>
+

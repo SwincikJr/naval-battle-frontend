@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
     providedIn: "root",
 })
 export class GameService {
-    
+
     public readonly baseEndpoint: string = `${environment.urlApi}/game`;
     public readonly boardEndpoint: string = `${environment.urlApi}/board`;
 

@@ -15,7 +15,8 @@ import { SocketService } from '../shared/services/socket.service'
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GameService } from '../shared/services/game.service'
 import { HttpService } from '../shared/services/http.service';
-import { MarketComponent } from './market/market.component'
+import { MarketComponent } from './market/market.component';
+import { RankingComponent } from './home-user/ranking/ranking.component'
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MarketComponent } from './market/market.component'
     ActivateComponent,
     HomeUserComponent,
     MarketComponent,
+    RankingComponent,
   ],
   imports: [
     CommonModule,

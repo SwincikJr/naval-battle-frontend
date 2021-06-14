@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from "@angular/common/http";
-import { environment } from '../../../environments/environment'
-import { User } from '../../shared/interfaces/user'
+import { environment } from '../../../environments/environment';
+import { User } from '../../shared/interfaces/user';
 
 @Injectable({
     providedIn: "root",
 })
 export class UserService {
-    
+
     public readonly url = `${environment.urlApi}`;
     private authenticated: User = null;
 
     constructor(private http: HttpClient) {
         this.loadAuthenticatedByLocalStorage();
     }
-    
+
     private loadAuthenticatedByLocalStorage() {
         let artemisia_user: any = localStorage.getItem('artemisia_user');
         if (artemisia_user) {

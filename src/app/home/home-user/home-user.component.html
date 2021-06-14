@@ -33,7 +33,7 @@
 
       </div>
     </div>
-    
+
     <div class="user-home-ranking-area">
       <div class="user-home-ranking-area-display">
         <div class="text-ranking">
@@ -47,35 +47,17 @@
           </div>
         </div>
         <div class="ranking-display">
-          <!--
-            ranking goes here...
-          -->
-          <!-- 
-          <div class = "text-ranking" (ngOnInit)>
-            Sua posição no Ranking Geral é: -->
-              <!-- utilizar o atributo myScore para fazer as operações de ranking -->
-          <div class = "text-ranking">
-            <div > 1o Lugar    </div>
-            <div > 2o Lugar    </div>
-            <div > 3o Lugar    </div>
-            <div > 4o Lugar    </div>
-            <div > 5o Lugar    </div>
-            <div > 6o Lugar    </div>
-            <div > 7o Lugar    </div>
-            <div > 8o Lugar    </div>
-            <div > 9o Lugar    </div>
-            <div > 10o Lugar   </div>
-          </div>>
-
-          </div>
+          <!-- ranking goes here... -->
+          <app-ranking></app-ranking>
         </div>
         <div class="play-option" (click)="openStartMatchModal()">
-          <img src="../../../assets/shuffle.png" />
+          <img src="../../../assets/skull_capitain.png" style="width: 70px; height: 70px;"/>DESAFIAR !
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <ng-template #startMatchModal>
   <div class="start-match-modal">
@@ -83,14 +65,14 @@
       <h2>À luta, marujos!</h2>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button 
-        label="Desafiar um jogador" 
+      <artemisia-button
+        label="Desafiar um jogador"
         (click)="challenge()"
       ></artemisia-button>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button 
-        label="Encontrar alguém disponível" 
+      <artemisia-button
+        label="Encontrar alguém disponível"
         [disabled]="finding"
         [loading]="finding"
         (click)="find()"
@@ -108,7 +90,7 @@
       <p>A partida começará assim que encontrarmos um jogador disponível...</p>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button 
+      <artemisia-button
         label="Cancelar busca"
         [disabled]="canceling"
         [loading]="canceling"
@@ -138,7 +120,7 @@
       <p>O jogador recebeu seu desafio! Estamos aguardando sua resposta...</p>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button 
+      <artemisia-button
         label="Cancelar desafio"
         [disabled]="canceling"
         [loading]="canceling"
@@ -157,7 +139,7 @@
       <p>O que você deseja fazer?</p>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button 
+      <artemisia-button
         label="Aceitar"
         [disabled]="accepting"
         [loading]="accepting"
@@ -165,7 +147,7 @@
       ></artemisia-button>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button 
+      <artemisia-button
         label="Declinar"
         [disabled]="canceling"
         [loading]="canceling"
