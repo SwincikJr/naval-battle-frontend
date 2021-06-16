@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
     providedIn: "root",
 })
 export class GameService {
-
+    
     public readonly baseEndpoint: string = `${environment.urlApi}/game`;
     public readonly boardEndpoint: string = `${environment.urlApi}/board`;
 
@@ -62,5 +62,9 @@ export class GameService {
 
     giveUp(matchId) {
         return this.httpClient.post(`${this.baseEndpoint}/giveup/${matchId}`, null, { headers: this.getHeader() })
+    }
+
+    rightShot(matchId) {
+        return this.httpClient.post(`${this.baseEndpoint}/rightShot/${matchId}`, null, { headers: this.getHeader() })
     }
 }

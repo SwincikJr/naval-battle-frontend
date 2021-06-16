@@ -12,6 +12,7 @@
             <login-component [class]="loginClass" *ngIf="activeOption.id === 'login'"></login-component>
             <register-component [class]="registerClass" *ngIf="activeOption.id === 'register'"></register-component>
             <recovery-component [class]="recoveryClass" *ngIf="activeOption.id === 'recovery'"></recovery-component>
+            <guest-component [class]="guestClass" *ngIf="activeOption.id === 'guest'"></guest-component>
         </div>
     </div>
     <div class="home-options-area">

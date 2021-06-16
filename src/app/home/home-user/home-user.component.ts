@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { timeStamp } from 'console';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { GameService } from 'src/app/shared/services/game.service';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -44,11 +45,15 @@ export class HomeUserComponent implements OnInit {
   @ViewChild('challengedModal')
   private challengedModalTemplate: TemplateRef<any>;
 
+  @ViewChild('logoutModal')
+  private logoutModalTemplate:TemplateRef<any>;
+
   private startMatchModal: NgbModalRef;
   private waitingModal: NgbModalRef;
   private challengeModal: NgbModalRef;
   private challengingModal: NgbModalRef;
   private challengedModal: NgbModalRef;
+  private logoutModal: NgbModalRef;
 
   constructor(
     private userService: UserService, 
@@ -97,6 +102,10 @@ export class HomeUserComponent implements OnInit {
 
   openStartMatchModal() {
     this.startMatchModal = this.modalService.open(this.startMatchModalTemplate)
+  }
+
+  openLogoutModal(){
+    this.logoutModal = this.modalService.open(this.logoutModalTemplate)
   }
 
   private configStaticModal() {
@@ -200,5 +209,30 @@ export class HomeUserComponent implements OnInit {
       this.challengedModal.close()
       this.httpService.HttpErrorHandler(error)
     })
+  }
+
+  closeModalAdvertisement() {
+    const modalOverlay = document.querySelector('.modal-overlay');
+    document.querySelector(".close-modal-advertisement").addEventListener("click", function() {
+      modalOverlay.classList.remove("active");
+    })
+  }
+
+  logout(){
+    const email = this.userService.getAuthenticated().email
+    if(email == undefined){
+      this.userService.deleteGuest().subscribe(resp =>{
+        this.userService.clearLocalStorage()
+      }),error =>{
+        console.log(error)
+      }
+    }else{
+      this.userService.clearLocalStorage();
+    }
+  }
+
+  cancelLogout() {
+    this.logoutModal.close()
+    this.logoutModal = null
   }
 } 

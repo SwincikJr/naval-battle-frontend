@@ -1,10 +1,12 @@
 <div class="user-home-background">
   <div class="user-home-content-area">
     <div class="user-home-navbar">
+
+
       <div class="home-navbar-left">
-        <a href="#">
-          <img src="../assets/logout.png" class="navbar-ico" />
-        </a>
+        <div class="logout" (click)="openLogoutModal()">
+          <img src="../assets/logout.png" class="navbar-ico" title="Sair" />
+        </div>
       </div>
       <div class="home-navbar-right">
 
@@ -27,12 +29,15 @@
           <p class="navbar-text">Olá, {{ username }}!</p>
         </a>
 
-        <a href="#">
-          <img src="../assets/settings.png" class="navbar-ico" />
-        </a>
-
+        <div class="dropdown">
+            <img src="../assets/settings.png" class="navbar-ico" />
+            <div class="dropdown-content">
+              <a href="#">Excluir Conta</a>
+            </div>
+        </div>
       </div>
     </div>
+
 
     <div class="user-home-ranking-area">
       <div class="user-home-ranking-area-display">
@@ -65,14 +70,14 @@
       <h2>À luta, marujos!</h2>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button
-        label="Desafiar um jogador"
+      <artemisia-button 
+        label="Desafiar um jogador" 
         (click)="challenge()"
       ></artemisia-button>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button
-        label="Encontrar alguém disponível"
+      <artemisia-button 
+        label="Encontrar alguém disponível" 
         [disabled]="finding"
         [loading]="finding"
         (click)="find()"
@@ -90,7 +95,7 @@
       <p>A partida começará assim que encontrarmos um jogador disponível...</p>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button
+      <artemisia-button 
         label="Cancelar busca"
         [disabled]="canceling"
         [loading]="canceling"
@@ -120,7 +125,7 @@
       <p>O jogador recebeu seu desafio! Estamos aguardando sua resposta...</p>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button
+      <artemisia-button 
         label="Cancelar desafio"
         [disabled]="canceling"
         [loading]="canceling"
@@ -139,7 +144,7 @@
       <p>O que você deseja fazer?</p>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button
+      <artemisia-button 
         label="Aceitar"
         [disabled]="accepting"
         [loading]="accepting"
@@ -147,11 +152,40 @@
       ></artemisia-button>
     </div>
     <div class="start-match-modal-option">
-      <artemisia-button
+      <artemisia-button 
         label="Declinar"
         [disabled]="canceling"
         [loading]="canceling"
         (click)="refuseChallenge()"
+      ></artemisia-button>
+    </div>
+  </div>
+
+</ng-template>
+<div class="modal-overlay active">
+  <div class="modal-advertisement">
+    <a class="close-modal-advertisement">
+      <img src="../../../assets/closeIcon.png" (click)="closeModalAdvertisement()" alt="fechar">
+    </a>
+    <div class="main-advertisement-content">Anúncio Aqui</div>
+  </div>
+</div>
+
+<ng-template #logoutModal>
+  <div class="start-match-modal">
+    <div class="start-match-modal-header">
+      <h2>Deseja Realmente sair?</h2>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Sim" 
+        (click)="logout()"
+      ></artemisia-button>
+    </div>
+    <div class="start-match-modal-option">
+      <artemisia-button 
+        label="Não" 
+        (click)="cancelLogout()"
       ></artemisia-button>
     </div>
   </div>

@@ -16,6 +16,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GameService } from '../shared/services/game.service'
 import { HttpService } from '../shared/services/http.service';
 import { MarketComponent } from './market/market.component';
+import { GuestComponent } from './guest/guest.component';
 import { RankingComponent } from './home-user/ranking/ranking.component'
 
 @NgModule({
@@ -27,6 +28,7 @@ import { RankingComponent } from './home-user/ranking/ranking.component'
     ActivateComponent,
     HomeUserComponent,
     MarketComponent,
+    GuestComponent,
     RankingComponent,
   ],
   imports: [
