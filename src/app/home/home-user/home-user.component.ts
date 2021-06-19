@@ -1,5 +1,5 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -16,7 +16,7 @@ import { UserService } from '../services/user';
   templateUrl: './home-user.component.html',
   styleUrls: ['./home-user.component.css'],
 })
-export class HomeUserComponent implements OnInit {
+export class HomeUserComponent implements OnInit, OnDestroy {
   
   challengeForm = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.pattern(/^(?!\s*$).+/)]),
@@ -81,6 +81,10 @@ export class HomeUserComponent implements OnInit {
     this.socket.on('artemisia.newChallenge', challenge => { this.newChallenge(challenge) })
     this.socket.on('artemisia.canceledChallenge', () => { this.canceledChallenge() })
     this.socket.on('artemisia.refusedChallenge', () => { this.refusedChallenge() })
+  }
+
+  ngOnDestroy() {
+    this.socket.disconnect()
   }
 
   private startedMatch(match) {

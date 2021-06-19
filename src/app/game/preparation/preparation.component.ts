@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { GameService } from 'src/app/shared/services/game.service';
@@ -11,7 +11,7 @@ import { SocketService } from 'src/app/shared/services/socket.service';
   templateUrl: './preparation.component.html',
   styleUrls: ['./preparation.component.css']
 })
-export class PreparationComponent implements OnInit {
+export class PreparationComponent implements OnInit, OnDestroy {
 
   gameInfo: any = null;
   rows = [];
@@ -61,6 +61,10 @@ export class PreparationComponent implements OnInit {
         this.router.navigateByUrl('/home')
       })
     })
+  }
+
+  ngOnDestroy() {
+    this.socket.disconnect()
   }
 
   startMatch() {

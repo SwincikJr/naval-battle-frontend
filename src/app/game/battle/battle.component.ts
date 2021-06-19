@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbConfig, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { GameService } from 'src/app/shared/services/game.service';
@@ -10,7 +10,7 @@ import { SocketService } from 'src/app/shared/services/socket.service';
   templateUrl: './battle.component.html',
   styleUrls: ['./battle.component.css']
 })
-export class BattleComponent implements OnInit {
+export class BattleComponent implements OnInit, OnDestroy {
 
   socket = null;
   matchId = '';
@@ -125,6 +125,10 @@ export class BattleComponent implements OnInit {
         console.log(error)
       })
     })
+  }
+
+  ngOnDestroy() {
+    this.socket.disconnect()
   }
 
   victoryEvent(data) {
