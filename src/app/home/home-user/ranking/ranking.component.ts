@@ -13,12 +13,10 @@ import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 })
 export class RankingComponent implements OnInit {
 
-  rank: Ranking;
+  rank: any;
   nome: string;
 
-  constructor( private rankingService: RankingService ) {
-
-   }
+  constructor( private rankingService: RankingService ) {}
 
    defineIcon(i: number): number{
      if (i <= 3){
@@ -31,16 +29,12 @@ export class RankingComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.rankingService.getScores().subscribe( ranking =>
-       { this.rank = ranking;
-         for(let i = 0; i < this.rank.ranking.length; i++){
-           this.rank.ranking[i].pos = i+1;
-           if(this.rank.ranking[i].username === this.rank.myScore[0].username){
-             this.rank.myScore[0].pos = this.rank.ranking[i].pos;
-           }
-         }
-         this.rank.ranking = this.rank.ranking.filter(x => x.username !== this.rank.myScore[0].username);
-        });
+    this.rankingService.getScores().subscribe(ranking => { 
+      this.rank = ranking.ranking.map((r, i) => {
+        r.pos = i + 1
+        return r
+      })
+    });
 
   }
 }

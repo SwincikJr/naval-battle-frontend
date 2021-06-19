@@ -29,6 +29,8 @@ export class HomeUserComponent implements OnInit {
   public canceling: boolean = false;
   public challenging: boolean = false;
   public socket: any = null;
+  public coins = 0;
+  public diamonds = 0;
 
   @ViewChild('startMatchModal')
   private startMatchModalTemplate: TemplateRef<any>;
@@ -68,6 +70,12 @@ export class HomeUserComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.userService.getAuthenticated().username;
+    this.userService.getMyInfos().subscribe(resp => {
+      this.coins = resp.coins,
+      this.diamonds = resp.diamonds
+    }, error => {
+      this.httpService.HttpErrorHandler(error)
+    })
     this.socket = this.socketService.connect();
     this.socket.on('artemisia.startedMatch', match => { this.startedMatch(match) })
     this.socket.on('artemisia.newChallenge', challenge => { this.newChallenge(challenge) })

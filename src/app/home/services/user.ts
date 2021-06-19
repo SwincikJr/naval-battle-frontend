@@ -85,4 +85,8 @@ export class UserService {
         location.reload()
 
     }
+
+    getMyInfos() {
+        return this.http.get<any>(`${this.url}/user/me`, { headers : this.getHeader()})
+    }
 }
