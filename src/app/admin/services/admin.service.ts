@@ -36,6 +36,22 @@ export class AdminService {
         }
     }
 
+    private loadAuthenticatedByLocalStorage() {
+        let artemisia_admin: any = localStorage.getItem('artemisia_admin');
+        if (artemisia_admin) {
+            try {
+                artemisia_admin = JSON.parse(artemisia_admin)
+                this.authenticated = {
+                    username: artemisia_admin.username,
+                    token: artemisia_admin.token
+                }
+            } catch(error) {
+                console.error(error)
+                this.authenticated = null;
+            }
+        }
+    }
+
     authenticate(username, password): Observable<Admin> {
         return this.http.post<Admin>(`${this.url}/authenticate`, { username, password })
     }
@@ -46,10 +62,12 @@ export class AdminService {
     }
 
     getAuthenticated(): Admin {
+        if (!this.authenticated) this.loadAuthenticatedByLocalStorage()
         return this.authenticated
     }
 
     isAuthenticated(): boolean {
+        if (!this.authenticated) this.loadAuthenticatedByLocalStorage()
         return !!this.authenticated
     }
 
