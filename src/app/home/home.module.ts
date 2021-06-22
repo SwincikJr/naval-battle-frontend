@@ -17,7 +17,8 @@ import { GameService } from '../shared/services/game.service'
 import { HttpService } from '../shared/services/http.service';
 import { MarketComponent } from './market/market.component';
 import { GuestComponent } from './guest/guest.component';
-import { RankingComponent } from './home-user/ranking/ranking.component'
+import { RankingComponent } from './home-user/ranking/ranking.component';
+import { ContactsComponent } from './contacts/contacts.component'
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { RankingComponent } from './home-user/ranking/ranking.component'
     MarketComponent,
     GuestComponent,
     RankingComponent,
+    ContactsComponent,
   ],
   imports: [
     CommonModule,
